@@ -1,5 +1,6 @@
 import { Inter, Outfit } from 'next/font/google';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -82,6 +83,7 @@ export default function RootLayout({ children }) {
           <Disclaimer />
           <InstallPWA />
         </ThemeProvider>
+        <Analytics />
         <Script id="register-sw" strategy="afterInteractive">
           {`
             if ('serviceWorker' in navigator) {
