@@ -1,4 +1,4 @@
-const cyberCrimeRights = [
+﻿const cyberCrimeRights = [
   {
     id: 'cyber-fraud-reporting',
     categorySlug: 'cyber-crime',

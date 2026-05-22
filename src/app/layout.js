@@ -1,10 +1,11 @@
-import { Inter, Space_Grotesk } from 'next/font/google';
+﻿import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Disclaimer from '@/components/Disclaimer';
 import InstallPWA from '@/components/InstallPWA';
 import BottomNav from '@/components/BottomNav';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -12,9 +13,9 @@ const inter = Inter({
   display: 'swap',
 });
 
-const spaceGrotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-outfit',
   display: 'swap',
 });
 
@@ -70,14 +71,16 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col font-sans antialiased bg-bg-dark text-text-primary pb-20 md:pb-0">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <BottomNav />
-        <Footer />
-        <Disclaimer />
-        <InstallPWA />
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <BottomNav />
+          <Footer />
+          <Disclaimer />
+          <InstallPWA />
+        </ThemeProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `

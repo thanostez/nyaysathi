@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useRef } from 'react';
 
@@ -34,7 +34,7 @@ function AnimatedCounter({ target, suffix, isVisible }) {
   }, [isVisible, target]);
 
   return (
-    <span className="text-4xl sm:text-5xl font-bold gradient-text font-[family-name:var(--font-space-grotesk)]">
+    <span className="text-4xl sm:text-5xl font-bold gradient-text font-[family-name:var(--font-outfit)]">
       {count}
       {suffix}
     </span>

@@ -1,4 +1,4 @@
-const studentRights = [
+﻿const studentRights = [
   {
     id: 'student-anti-ragging',
     categorySlug: 'student',

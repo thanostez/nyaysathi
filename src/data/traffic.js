@@ -1,4 +1,4 @@
-const trafficFines = [
+﻿const trafficFines = [
   {
     id: 'tf-helmet',
     offense: 'Driving without Helmet',

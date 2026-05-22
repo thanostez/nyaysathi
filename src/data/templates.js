@@ -1,4 +1,4 @@
-const templates = [
+﻿const templates = [
   {
     id: 'fir-application',
     title: 'Application for filing FIR',

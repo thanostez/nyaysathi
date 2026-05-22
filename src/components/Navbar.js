@@ -4,23 +4,26 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import LanguageTranslate from '@/components/LanguageTranslate';
+import { useTheme } from 'next-themes';
+import { Sun, Moon, Search, ChevronDown, Scale } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/rights', label: 'Legal Rights' },
   { href: '/templates', label: 'Templates' },
   { href: '/helplines', label: 'Helplines' },
   { href: '/traffic', label: 'Traffic Fines' },
 ];
 
 const categoryLinks = [
-  { href: '/categories/employment', label: '💼 Employment & Labor' },
-  { href: '/categories/tenant', label: '🏠 Tenant & Housing' },
-  { href: '/categories/consumer', label: '🛒 Consumer Protection' },
-  { href: '/categories/women-safety', label: "🛡️ Women's Safety" },
-  { href: '/categories/police', label: '⚖️ Police & Criminal' },
-  { href: '/categories/cyber-crime', label: '💻 Cyber Crime' },
-  { href: '/categories/family', label: '👨‍👩‍👧‍👦 Family Law' },
-  { href: '/categories/student', label: '🎓 Student & Education' },
+  { href: '/categories/employment', label: 'Employment & Labor' },
+  { href: '/categories/tenant', label: 'Tenant & Housing' },
+  { href: '/categories/consumer', label: 'Consumer Protection' },
+  { href: '/categories/women-safety', label: "Women's Safety" },
+  { href: '/categories/police', label: 'Police & Criminal' },
+  { href: '/categories/cyber-crime', label: 'Cyber Crime' },
+  { href: '/categories/family', label: 'Family Law' },
+  { href: '/categories/student', label: 'Student & Education' },
 ];
 
 export default function Navbar() {
@@ -28,8 +31,11 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const dropdownRef = useRef(null);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -55,101 +61,104 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'glass-strong shadow-lg shadow-primary/5'
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
+    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none flex justify-center">
+      <nav 
+        className={`pointer-events-auto transition-all duration-500 flex items-center justify-between w-full max-w-7xl px-4 sm:px-6 h-16 rounded-full border ${
+          scrolled 
+            ? 'glass-strong shadow-xl border-primary/20 bg-surface/80' 
+            : 'glass shadow-lg border-primary/10 bg-surface/50'
+        }`}
+        aria-label="Main navigation"
+      >
+        {/* Logo */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-xl font-bold font-[family-name:var(--font-outfit)] hover:scale-105 transition-transform"
+          aria-label="NyaySathi Home"
+        >
+          <Scale className="w-8 h-8 text-primary drop-shadow-md" aria-hidden="true" />
+          <span className="gradient-text tracking-tight">NyaySathi</span>
+        </Link>
+
+        {/* Desktop navigation */}
+        <div className="hidden md:flex items-center gap-2">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`relative px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                isActive(link.href)
+                  ? 'text-primary bg-primary/10 shadow-inner'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-surface-light/60'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          {/* Categories dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setCategoriesOpen(!categoriesOpen)}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                pathname.startsWith('/categories')
+                  ? 'text-primary bg-primary/10 shadow-inner'
+                  : 'text-text-secondary hover:text-text-primary hover:bg-surface-light/60'
+              }`}
+              aria-expanded={categoriesOpen}
+              aria-haspopup="true"
+            >
+              Categories
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${categoriesOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {categoriesOpen && (
+              <div
+                className="absolute right-0 top-full mt-3 w-64 glass-strong border border-primary/20 rounded-2xl shadow-2xl py-2 animate-slide-down overflow-hidden backdrop-blur-xl"
+                role="menu"
+              >
+                {categoryLinks.map((cat) => (
+                  <Link
+                    key={cat.href}
+                    href={cat.href}
+                    role="menuitem"
+                    className={`block px-5 py-3 text-sm font-medium transition-all ${
+                      pathname === cat.href
+                        ? 'text-primary bg-primary/10 pl-6 border-l-2 border-primary'
+                        : 'text-text-secondary hover:text-text-primary hover:bg-surface-light/80 hover:pl-6'
+                    }`}
+                  >
+                    {cat.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Search link */}
           <Link
-            href="/"
-            className="flex items-center gap-2 text-xl font-bold font-[family-name:var(--font-space-grotesk)] hover:opacity-80 transition-opacity"
-            aria-label="NyaySathi Home"
+            href="/search"
+            className="p-2.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/10 transition-all hover:scale-110"
+            aria-label="Search"
           >
-            <span className="text-2xl" aria-hidden="true">⚖️</span>
-            <span className="gradient-text">NyaySathi</span>
+            <Search className="w-5 h-5" />
           </Link>
 
-          {/* Desktop navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive(link.href)
-                    ? 'text-primary bg-primary/10'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-surface-light/50'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-
-            {/* Categories dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setCategoriesOpen(!categoriesOpen)}
-                className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  pathname.startsWith('/categories')
-                    ? 'text-primary bg-primary/10'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-surface-light/50'
-                }`}
-                aria-expanded={categoriesOpen}
-                aria-haspopup="true"
-              >
-                Categories
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${categoriesOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {categoriesOpen && (
-                <div
-                  className="absolute right-0 top-full mt-2 w-64 glass-strong rounded-xl shadow-xl shadow-primary/10 py-2 animate-slide-down"
-                  role="menu"
-                >
-                  {categoryLinks.map((cat) => (
-                    <Link
-                      key={cat.href}
-                      href={cat.href}
-                      role="menuitem"
-                      className={`block px-4 py-2.5 text-sm transition-colors ${
-                        pathname === cat.href
-                          ? 'text-primary bg-primary/10'
-                          : 'text-text-secondary hover:text-text-primary hover:bg-surface-light/50'
-                      }`}
-                    >
-                      {cat.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Search link */}
-            <Link
-              href="/search"
-              className="ml-2 p-2 rounded-lg text-text-secondary hover:text-primary hover:bg-primary/10 transition-colors"
-              aria-label="Search"
+          {/* Theme Toggle */}
+          {mounted && (
+            <button
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+              className="p-2.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/10 transition-all hover:scale-110"
+              aria-label="Toggle Dark Mode"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </Link>
-          </div>
+              {resolvedTheme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+          )}
 
-          <div className="flex items-center gap-2 ml-auto md:ml-4">
+          {/* Language Translation (hidden on very small screens) */}
+          <div className="hidden sm:block pl-2 border-l border-primary/10">
             <LanguageTranslate />
           </div>
         </div>

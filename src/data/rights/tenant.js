@@ -1,4 +1,4 @@
-const tenantRights = [
+﻿const tenantRights = [
   {
     id: 'tenant-illegal-eviction',
     categorySlug: 'tenant',

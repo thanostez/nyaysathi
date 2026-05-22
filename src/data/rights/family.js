@@ -1,4 +1,4 @@
-const familyRights = [
+﻿const familyRights = [
   {
     id: 'family-domestic-violence',
     categorySlug: 'family',

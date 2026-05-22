@@ -1,4 +1,4 @@
-const policeRights = [
+﻿const policeRights = [
   {
     id: 'police-fir-filing',
     categorySlug: 'police',

@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold font-[family-name:var(--font-space-grotesk)] mb-4 hover:opacity-80 transition-opacity">
+            <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold font-[family-name:var(--font-outfit)] mb-4 hover:opacity-80 transition-opacity">
               <span className="text-2xl" aria-hidden="true">⚖️</span>
               <span className="gradient-text">NyaySathi</span>
             </Link>

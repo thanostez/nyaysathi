@@ -1,4 +1,4 @@
-const womenSafetyRights = [
+﻿const womenSafetyRights = [
   {
     id: 'women-safety-domestic-violence',
     categorySlug: 'women-safety',

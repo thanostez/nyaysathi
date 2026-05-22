@@ -1,4 +1,4 @@
-import { searchRights, searchTemplates, searchHelplines } from '@/data';
+﻿import { searchRights, searchTemplates, searchHelplines } from '@/data';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {

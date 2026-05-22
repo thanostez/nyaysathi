@@ -1,8 +1,8 @@
-import SearchBar from './SearchBar';
+﻿import SearchBar from './SearchBar';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen md:min-h-[80vh] flex items-center justify-center overflow-hidden pt-16">
+    <section className="relative min-h-screen md:min-h-[85vh] flex items-center justify-center overflow-hidden py-24 md:py-32">
       {/* Animated gradient background */}
       <div
         className="absolute inset-0 animate-gradient-shift"
@@ -16,61 +16,47 @@ export default function Hero() {
 
       {/* Decorative orbs */}
       <div
-        className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full opacity-20 blur-3xl animate-float"
+        className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full opacity-15 blur-3xl"
         style={{ background: 'radial-gradient(circle, #6C5CE7, transparent 70%)' }}
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full opacity-15 blur-3xl animate-float"
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
         style={{
           background: 'radial-gradient(circle, #00CEC9, transparent 70%)',
-          animationDelay: '-3s',
         }}
         aria-hidden="true"
       />
-      <div
-        className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full opacity-10 blur-2xl animate-float"
-        style={{
-          background: 'radial-gradient(circle, #A29BFE, transparent 70%)',
-          animationDelay: '-1.5s',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Floating shapes */}
-      <div className="absolute top-20 right-10 w-4 h-4 rounded-full bg-primary/30 animate-float" style={{ animationDelay: '-2s' }} aria-hidden="true" />
-      <div className="absolute top-40 left-20 w-3 h-3 rounded-full bg-accent/30 animate-float" style={{ animationDelay: '-4s' }} aria-hidden="true" />
-      <div className="absolute bottom-32 left-1/3 w-5 h-5 rounded-full bg-primary-light/20 animate-float" style={{ animationDelay: '-1s' }} aria-hidden="true" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        <div className="animate-fade-in">
-          <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-primary/15 text-primary-light border border-primary/20">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
+        <div className="animate-fade-in mb-8">
+          <span className="inline-block px-5 py-2 rounded-full text-sm font-bold tracking-widest uppercase bg-primary/10 text-primary-light border border-primary/20 shadow-[0_0_15px_rgba(108,92,231,0.2)]">
             Free Legal Rights Assistant for India
           </span>
         </div>
 
         <h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[family-name:var(--font-space-grotesk)] mb-6 animate-slide-up"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-tight font-extrabold font-[family-name:var(--font-outfit)] mb-8 animate-slide-up tracking-tight"
         >
-          <span className="gradient-text">Know Your Rights.</span>
+          <span className="gradient-text drop-shadow-lg">Know Your Rights.</span>
         </h1>
 
         <p
-          className="text-lg sm:text-xl md:text-2xl text-text-secondary max-w-2xl mx-auto mb-10 animate-slide-up"
+          className="text-xl sm:text-2xl md:text-3xl text-text-secondary max-w-3xl mx-auto mb-14 animate-slide-up leading-relaxed"
           style={{ animationDelay: '0.15s' }}
         >
-          Understand the law. Protect yourself. Take action.
+          Understand the law. Protect yourself. <span className="text-text-primary font-medium">Take action.</span>
         </p>
 
         {/* Search bar */}
-        <div className="max-w-2xl mx-auto mb-12 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <SearchBar />
+        <div className="w-full max-w-3xl mx-auto mb-20 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <SearchBar large={true} />
         </div>
 
         {/* Floating stats */}
         <div
-          className="flex flex-wrap justify-center gap-6 sm:gap-10 animate-slide-up"
+          className="flex flex-wrap justify-center gap-8 sm:gap-16 animate-slide-up bg-surface/30 backdrop-blur-md border border-white/5 py-6 px-10 rounded-3xl"
           style={{ animationDelay: '0.45s' }}
         >
           {[
@@ -80,12 +66,12 @@ export default function Hero() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="flex items-center gap-2 text-sm sm:text-base"
+              className="flex flex-col items-center gap-1"
             >
-              <span className="font-bold gradient-text text-lg sm:text-xl">
+              <span className="font-extrabold gradient-text text-3xl sm:text-4xl">
                 {stat.number}
               </span>
-              <span className="text-text-secondary">{stat.label}</span>
+              <span className="text-sm sm:text-base text-text-secondary font-medium tracking-wide uppercase">{stat.label}</span>
             </div>
           ))}
         </div>
@@ -93,7 +79,7 @@ export default function Hero() {
 
       {/* Bottom gradient fade */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg-dark to-transparent"
+        className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-bg-dark to-transparent"
         aria-hidden="true"
       />
     </section>

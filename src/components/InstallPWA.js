@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { Scale } from 'lucide-react';
 
 export default function InstallPWA() {
   const [show, setShow] = useState(false);
@@ -56,12 +57,12 @@ export default function InstallPWA() {
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-sm z-50 animate-slide-up">
+    <div className="fixed bottom-28 md:bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-sm z-50 animate-slide-up">
       <div className="glass-strong rounded-2xl p-5 shadow-2xl shadow-primary/20 border border-primary/25">
         <div className="flex items-start gap-4">
           {/* App icon */}
-          <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl">
-            ⚖️
+          <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+            <Scale className="w-7 h-7 text-white" />
           </div>
 
           <div className="flex-1 min-w-0">

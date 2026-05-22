@@ -9,7 +9,7 @@ export default function BottomNav() {
 
   const navItems = [
     { href: '/', label: 'Home', icon: FaHome },
-    { href: '/#categories-heading', label: 'Topics', icon: FaList },
+    { href: '/rights', label: 'Rights', icon: FaList },
     { href: '/traffic', label: 'Traffic', icon: FaTrafficLight },
     { href: '/templates', label: 'Docs', icon: FaFileAlt },
     { href: '/helplines', label: 'Helpline', icon: FaPhoneAlt },

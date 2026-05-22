@@ -40,7 +40,7 @@ export default function EmergencyStrip() {
                 <div className="text-xs text-text-secondary leading-none mb-0.5">
                   {item.description}
                 </div>
-                <div className="text-sm font-bold text-danger font-[family-name:var(--font-space-grotesk)]">
+                <div className="text-sm font-bold text-danger font-[family-name:var(--font-outfit)]">
                   {item.number}
                 </div>
               </div>

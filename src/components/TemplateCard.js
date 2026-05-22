@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -32,7 +32,7 @@ export default function TemplateCard({ template }) {
       <div className="p-5 sm:p-6">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-base sm:text-lg font-semibold text-text-primary font-[family-name:var(--font-space-grotesk)]">
+          <h3 className="text-base sm:text-lg font-semibold text-text-primary font-[family-name:var(--font-outfit)]">
             {title}
           </h3>
           <span className="shrink-0 text-xs px-2.5 py-1 rounded-full bg-accent/15 text-accent font-medium">

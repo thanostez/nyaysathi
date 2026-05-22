@@ -1,11 +1,11 @@
-export default function HelplineCard({ helpline }) {
+﻿export default function HelplineCard({ helpline }) {
   const { name, number, description, category, hours, languages, is24x7 } = helpline;
 
   return (
     <div className="glass rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:border-primary/25">
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex-1 min-w-0">
-          <h3 className="text-base font-semibold text-text-primary font-[family-name:var(--font-space-grotesk)] mb-1">
+          <h3 className="text-base font-semibold text-text-primary font-[family-name:var(--font-outfit)] mb-1">
             {name}
           </h3>
           <span className="inline-block text-xs px-2.5 py-0.5 rounded-full bg-primary/15 text-primary-light font-medium">
@@ -31,7 +31,7 @@ export default function HelplineCard({ helpline }) {
       {/* Phone number — large, click-to-call */}
       <a
         href={`tel:${number}`}
-        className="inline-flex items-center gap-2 text-2xl sm:text-3xl font-bold gradient-text hover:opacity-80 transition-opacity mb-3 font-[family-name:var(--font-space-grotesk)]"
+        className="inline-flex items-center gap-2 text-2xl sm:text-3xl font-bold gradient-text hover:opacity-80 transition-opacity mb-3 font-[family-name:var(--font-outfit)]"
         aria-label={`Call ${name} at ${number}`}
       >
         <svg className="w-6 h-6 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

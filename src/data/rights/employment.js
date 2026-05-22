@@ -1,4 +1,4 @@
-const employmentRights = [
+﻿const employmentRights = [
   {
     id: 'employment-wrongful-termination',
     categorySlug: 'employment',

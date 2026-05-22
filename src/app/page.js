@@ -6,19 +6,21 @@ import { categories } from '@/data';
 import Link from 'next/link';
 import NearestPoliceBtn from '@/components/NearestPoliceBtn';
 
+import { Search, BookOpen, Zap, Car } from 'lucide-react';
+
 const howItWorks = [
   {
-    icon: '🔍',
+    icon: <Search className="w-10 h-10 text-primary" />,
     title: 'Search',
     description: 'Describe your situation in plain language or browse categories to find the rights that apply to you.',
   },
   {
-    icon: '📚',
+    icon: <BookOpen className="w-10 h-10 text-accent" />,
     title: 'Learn',
     description: 'Read easy-to-understand explanations of your legal rights, relevant laws, and what protections you have.',
   },
   {
-    icon: '⚡',
+    icon: <Zap className="w-10 h-10 text-warning" />,
     title: 'Act',
     description: 'Follow step-by-step action guides, use ready-made templates, and connect with helplines for support.',
   },
@@ -41,7 +43,9 @@ export default function HomePage() {
               href="/traffic" 
               className="w-full sm:w-auto flex items-center justify-center gap-4 px-6 py-4 rounded-xl glass hover:border-primary/50 hover:shadow-lg transition-all"
             >
-              <span className="text-3xl" aria-hidden="true">🚦</span>
+              <div className="p-2 bg-primary/20 rounded-full text-primary">
+                <Car className="w-8 h-8" />
+              </div>
               <div className="text-left">
                 <div className="font-bold text-text-primary">Traffic Fines Lookup</div>
                 <div className="text-xs text-text-secondary">Check official penalties & rules</div>
@@ -59,7 +63,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2
               id="categories-heading"
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-space-grotesk)] mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-outfit)] mb-4"
             >
               <span className="gradient-text">Know Your Rights</span> By Category
             </h2>
@@ -73,6 +77,16 @@ export default function HomePage() {
               <CategoryCard key={category.id} category={category} />
             ))}
           </div>
+
+          <div className="mt-12 text-center animate-fade-in">
+            <Link
+              href="/rights"
+              className="inline-flex items-center gap-2.5 px-8 py-4 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary/20 text-base"
+            >
+              Browse All Legal Rights
+              <span className="text-lg">⚖️</span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -82,7 +96,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2
               id="how-it-works-heading"
-              className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-space-grotesk)] mb-4"
+              className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-outfit)] mb-4"
             >
               How <span className="gradient-text">NyaySathi</span> Works
             </h2>
@@ -103,7 +117,7 @@ export default function HomePage() {
                 <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm font-bold mb-3" aria-hidden="true">
                   {index + 1}
                 </div>
-                <h3 className="text-lg font-semibold text-text-primary font-[family-name:var(--font-space-grotesk)] mb-2">
+                <h3 className="text-lg font-semibold text-text-primary font-[family-name:var(--font-outfit)] mb-2">
                   {step.title}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed">

@@ -67,7 +67,7 @@ export default function NearestPoliceBtn({ className = '' }) {
             
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b border-primary/20 bg-surface-light">
-              <h3 className="font-bold text-lg sm:text-xl text-text-primary flex items-center gap-2 font-[family-name:var(--font-space-grotesk)]">
+              <h3 className="font-bold text-lg sm:text-xl text-text-primary flex items-center gap-2 font-[family-name:var(--font-outfit)]">
                 <span className="text-2xl" aria-hidden="true">📍</span> Nearest Police Stations
               </h3>
               <button 

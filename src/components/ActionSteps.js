@@ -1,4 +1,4 @@
-export default function ActionSteps({ steps }) {
+﻿export default function ActionSteps({ steps }) {
   if (!steps || steps.length === 0) return null;
 
   return (
@@ -18,7 +18,7 @@ export default function ActionSteps({ steps }) {
           )}
 
           {/* Step number circle */}
-          <div className="relative z-10 flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-primary/20 border border-primary/30 text-primary font-bold text-sm font-[family-name:var(--font-space-grotesk)]">
+          <div className="relative z-10 flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-primary/20 border border-primary/30 text-primary font-bold text-sm font-[family-name:var(--font-outfit)]">
             {index + 1}
           </div>
 

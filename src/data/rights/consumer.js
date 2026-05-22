@@ -1,4 +1,4 @@
-const consumerRights = [
+﻿const consumerRights = [
   {
     id: 'consumer-defective-products',
     categorySlug: 'consumer',

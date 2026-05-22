@@ -1,4 +1,4 @@
-import categories from './categories';
+﻿import categories from './categories';
 import employment from './rights/employment';
 import tenant from './rights/tenant';
 import consumer from './rights/consumer';

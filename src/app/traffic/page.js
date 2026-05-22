@@ -19,7 +19,7 @@ export default function TrafficFinesPage() {
         
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <span className="inline-block text-4xl mb-4">🚦</span>
-          <h1 className="text-3xl sm:text-4xl font-bold text-text-primary mb-3 font-[family-name:var(--font-space-grotesk)]">
+          <h1 className="text-3xl sm:text-4xl font-bold text-text-primary mb-3 font-[family-name:var(--font-outfit)]">
             Traffic Fines & RTO Rules
           </h1>
           <p className="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
@@ -51,7 +51,7 @@ export default function TrafficFinesPage() {
             displayedFines.map((item) => (
               <div key={item.id} className="glass rounded-xl p-5 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-2 sm:gap-4 mb-3">
-                  <h3 className="font-semibold text-text-primary text-lg font-[family-name:var(--font-space-grotesk)] leading-tight">
+                  <h3 className="font-semibold text-text-primary text-lg font-[family-name:var(--font-outfit)] leading-tight">
                     {item.offense}
                   </h3>
                   <span className="shrink-0 inline-block px-3 py-1.5 rounded-lg bg-accent/10 text-accent font-bold text-sm sm:text-base border border-accent/20">
