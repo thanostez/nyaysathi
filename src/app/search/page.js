@@ -48,13 +48,10 @@ async function performApiSearch(query) {
   return res.json();
 }
 
-function SearchResults() {
+function SearchResultsContent({ query }) {
   const { push } = useRouter();
-  const { get } = useSearchParams();
-  const query = get('q') || '';
   
   const [inputValue, setInputValue] = useState(query);
-  const prevQueryRef = useRef(query);
   const [searchState, dispatch] = useReducer(searchReducer, searchInitialState);
   const { results, loading } = searchState;
   const inputRef = useRef(null);
@@ -65,12 +62,6 @@ function SearchResults() {
       inputRef.current.focus();
     }
   }, []);
-
-  // Update input value when query parameter changes (during rendering)
-  if (query !== prevQueryRef.current) {
-    prevQueryRef.current = query;
-    setInputValue(query);
-  }
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -244,9 +235,9 @@ function SearchResults() {
         <div className="space-y-12 animate-fade-in">
           <div className="glass p-12 text-center rounded-2xl border border-surface-light shadow-xl">
             <span className="text-5xl mb-4 block">🔍</span>
-            <h2 className="text-xl font-semibold text-text-primary mb-2">No results found for "{query}"</h2>
+              <h2 className="text-xl font-semibold text-text-primary mb-2">No results found for &quot;{query}&quot;</h2>
             <p className="text-text-secondary max-w-md mx-auto mb-6">
-              We couldn't find any matching rights, templates, or helplines. Try checking your spelling or using simpler keywords.
+              We couldn&apos;t find any matching rights, templates, or helplines. Try checking your spelling or using simpler keywords.
             </p>
             <button
               onClick={handleClear}
@@ -289,7 +280,7 @@ function SearchResults() {
         <div className="space-y-12 animate-fade-in">
           <div className="border-b border-surface-light pb-4">
             <h2 className="text-lg font-semibold text-text-primary">
-              Search results for "{query}"
+              Search results for &quot;{query}&quot;
             </h2>
             <p className="text-sm text-text-secondary mt-1">
               Showing {totalResults} result{totalResults !== 1 ? 's' : ''} in total
@@ -342,6 +333,13 @@ function SearchResults() {
       )}
     </div>
   );
+}
+
+function SearchResults() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get('q') || '';
+
+  return <SearchResultsContent key={query} query={query} />;
 }
 
 export default function SearchPage() {
