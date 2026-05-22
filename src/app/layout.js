@@ -1,4 +1,5 @@
-﻿import { Inter, Outfit } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -20,9 +21,9 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: 'NyaySathi — Know Your Legal Rights',
+  title: 'NyaySathi - Know Your Legal Rights',
   description:
-    'Your free legal rights assistant for India. Understand your rights, access legal templates, and find emergency helplines — all in plain language.',
+    'Your free legal rights assistant for India. Understand your rights, access legal templates, and find emergency helplines - all in plain language.',
   keywords: [
     'legal rights India',
     'know your rights',
@@ -36,7 +37,7 @@ export const metadata = {
   ],
   authors: [{ name: 'NyaySathi' }],
   openGraph: {
-    title: 'NyaySathi — Know Your Legal Rights',
+    title: 'NyaySathi - Know Your Legal Rights',
     description:
       'Your free legal rights assistant for India. Understand your rights in plain language.',
     type: 'website',
@@ -45,7 +46,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NyaySathi — Know Your Legal Rights',
+    title: 'NyaySathi - Know Your Legal Rights',
     description:
       'Your free legal rights assistant for India. Understand your rights in plain language.',
   },
@@ -81,17 +82,15 @@ export default function RootLayout({ children }) {
           <Disclaimer />
           <InstallPWA />
         </ThemeProvider>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js').catch(function() {});
-                });
-              }
-            `,
-          }}
-        />
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').catch(function() {});
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );

@@ -1,12 +1,32 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Scale } from 'lucide-react';
 
 export default function InstallPWA() {
   const [show, setShow] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const deferredPromptRef = useRef(null);
   const timerRef = useRef(null);
+
+  const handler = useCallback((e) => {
+    e.preventDefault();
+    deferredPromptRef.current = e;
+
+    // Show after 30s or if second visit
+    const visits = parseInt(localStorage.getItem('nyaysathi-visit-count') || '0', 10) + 1;
+    localStorage.setItem('nyaysathi-visit-count', String(visits));
+
+    if (visits >= 2) {
+      setShow(true);
+    } else {
+      timerRef.current = setTimeout(() => setShow(true), 30000);
+    }
+  }, []);
+
+  const handlerRef = useRef(handler);
+  useEffect(() => {
+    handlerRef.current = handler;
+  }, [handler]);
 
   useEffect(() => {
     // Don't show if previously dismissed
@@ -16,37 +36,25 @@ export default function InstallPWA() {
     // Check if already installed (standalone mode)
     if (window.matchMedia('(display-mode: standalone)').matches) return;
 
-    const handler = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
+    const eventListener = (e) => handlerRef.current(e);
 
-      // Show after 30s or if second visit
-      const visits = parseInt(localStorage.getItem('nyaysathi-visit-count') || '0', 10) + 1;
-      localStorage.setItem('nyaysathi-visit-count', String(visits));
-
-      if (visits >= 2) {
-        setShow(true);
-      } else {
-        timerRef.current = setTimeout(() => setShow(true), 30000);
-      }
-    };
-
-    window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener('beforeinstallprompt', eventListener);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handler);
+      window.removeEventListener('beforeinstallprompt', eventListener);
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
 
   const handleInstall = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
+    const promptEvent = deferredPromptRef.current;
+    if (!promptEvent) return;
+    promptEvent.prompt();
+    const { outcome } = await promptEvent.userChoice;
     if (outcome === 'accepted') {
       setShow(false);
     }
-    setDeferredPrompt(null);
+    deferredPromptRef.current = null;
   };
 
   const handleDismiss = () => {
@@ -61,8 +69,8 @@ export default function InstallPWA() {
       <div className="glass-strong rounded-2xl p-5 shadow-2xl shadow-primary/20 border border-primary/25">
         <div className="flex items-start gap-4">
           {/* App icon */}
-          <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <Scale className="w-7 h-7 text-white" />
+          <div className="shrink-0 size-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+            <Scale className="size-7 text-white" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -70,7 +78,7 @@ export default function InstallPWA() {
               Install NyaySathi
             </h3>
             <p className="text-xs text-text-secondary leading-relaxed mb-3">
-              Get quick access to your legal rights — works offline too!
+              Get quick access to your legal rights (works offline too!)
             </p>
 
             <div className="flex items-center gap-2">
@@ -95,7 +103,7 @@ export default function InstallPWA() {
             className="shrink-0 p-1 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-light/50 transition-colors"
             aria-label="Close install prompt"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>

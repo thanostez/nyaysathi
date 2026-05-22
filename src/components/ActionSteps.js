@@ -1,11 +1,11 @@
-﻿export default function ActionSteps({ steps }) {
+export default function ActionSteps({ steps }) {
   if (!steps || steps.length === 0) return null;
 
   return (
     <div className="relative" role="list" aria-label="Action steps">
       {steps.map((step, index) => (
         <div
-          key={index}
+          key={step}
           className="relative flex gap-4 pb-8 last:pb-0"
           role="listitem"
         >
@@ -18,7 +18,7 @@
           )}
 
           {/* Step number circle */}
-          <div className="relative z-10 flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-primary/20 border border-primary/30 text-primary font-bold text-sm font-[family-name:var(--font-outfit)]">
+          <div className="relative z-10 flex items-center justify-center size-10 shrink-0 rounded-full bg-primary/20 border border-primary/30 text-primary font-bold text-sm font-[family-name:var(--font-outfit)]">
             {index + 1}
           </div>
 

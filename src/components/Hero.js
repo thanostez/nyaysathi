@@ -1,4 +1,4 @@
-﻿import SearchBar from './SearchBar';
+import SearchBar from './SearchBar';
 
 export default function Hero() {
   return (
@@ -16,12 +16,12 @@ export default function Hero() {
 
       {/* Decorative orbs */}
       <div
-        className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full opacity-15 blur-3xl"
+        className="absolute top-1/4 left-1/4 size-72 rounded-full opacity-15 blur-3xl"
         style={{ background: 'radial-gradient(circle, #6C5CE7, transparent 70%)' }}
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
+        className="absolute bottom-1/4 right-1/4 size-96 rounded-full opacity-10 blur-3xl"
         style={{
           background: 'radial-gradient(circle, #00CEC9, transparent 70%)',
         }}
@@ -37,7 +37,7 @@ export default function Hero() {
         </div>
 
         <h1
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-tight font-extrabold font-[family-name:var(--font-outfit)] mb-8 animate-slide-up tracking-tight"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-tight font-semibold font-[family-name:var(--font-outfit)] mb-8 animate-slide-up tracking-tight"
         >
           <span className="gradient-text drop-shadow-lg">Know Your Rights.</span>
         </h1>
@@ -68,7 +68,7 @@ export default function Hero() {
               key={stat.label}
               className="flex flex-col items-center gap-1"
             >
-              <span className="font-extrabold gradient-text text-3xl sm:text-4xl">
+              <span className="font-semibold gradient-text text-3xl sm:text-4xl">
                 {stat.number}
               </span>
               <span className="text-sm sm:text-base text-text-secondary font-medium tracking-wide uppercase">{stat.label}</span>

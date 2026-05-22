@@ -1,18 +1,68 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useReducer, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
+const initialState = {
+  query: '',
+  results: { rights: [], templates: [], helplines: [] },
+  isOpen: false,
+  isLoading: false,
+  highlightIndex: -1,
+};
+
+function searchReducer(state, action) {
+  switch (action.type) {
+    case 'SET_QUERY':
+      return { ...state, query: action.payload };
+    case 'START_SEARCH':
+      return { ...state, isLoading: true };
+    case 'SEARCH_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+        results: action.payload,
+        isOpen: true,
+        highlightIndex: -1,
+      };
+    case 'SEARCH_FAILURE':
+      return {
+        ...state,
+        isLoading: false,
+        results: { rights: [], templates: [], helplines: [] },
+        highlightIndex: -1,
+      };
+    case 'CLEAR_SEARCH':
+      return {
+        ...state,
+        query: '',
+        results: { rights: [], templates: [], helplines: [] },
+        isOpen: false,
+        highlightIndex: -1,
+      };
+    case 'SET_OPEN':
+      return { ...state, isOpen: action.payload };
+    case 'SET_HIGHLIGHT_INDEX':
+      return {
+        ...state,
+        highlightIndex:
+          typeof action.payload === 'function'
+            ? action.payload(state.highlightIndex)
+            : action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
 export default function SearchBar({ large = false }) {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState({ rights: [], templates: [], helplines: [] });
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [highlightIndex, setHighlightIndex] = useState(-1);
+  const [state, dispatch] = useReducer(searchReducer, initialState);
+  const { query, results, isOpen, isLoading, highlightIndex } = state;
+  
   const wrapperRef = useRef(null);
   const inputRef = useRef(null);
   const debounceRef = useRef(null);
-  const router = useRouter();
+  const { push } = useRouter();
 
   const allResults = [
     ...results.rights.map((r) => ({ ...r, type: 'right', href: `/rights/${r.id}` })),
@@ -22,27 +72,22 @@ export default function SearchBar({ large = false }) {
 
   const doSearch = useCallback(async (q) => {
     if (!q || q.trim().length < 2) {
-      setResults({ rights: [], templates: [], helplines: [] });
-      setIsOpen(false);
+      dispatch({ type: 'CLEAR_SEARCH' });
       return;
     }
-    setIsLoading(true);
+    dispatch({ type: 'START_SEARCH' });
     try {
       const res = await fetch(`/api/search?q=${encodeURIComponent(q.trim())}`);
       const data = await res.json();
-      setResults(data);
-      setIsOpen(true);
-      setHighlightIndex(-1);
+      dispatch({ type: 'SEARCH_SUCCESS', payload: data });
     } catch {
-      setResults({ rights: [], templates: [], helplines: [] });
-    } finally {
-      setIsLoading(false);
+      dispatch({ type: 'SEARCH_FAILURE' });
     }
   }, []);
 
-  const handleChange = (e) => {
+  const handleQueryChange = (e) => {
     const val = e.target.value;
-    setQuery(val);
+    dispatch({ type: 'SET_QUERY', payload: val });
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => doSearch(val), 300);
   };
@@ -50,8 +95,8 @@ export default function SearchBar({ large = false }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      setIsOpen(false);
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+      dispatch({ type: 'SET_OPEN', payload: false });
+      push(`/search?q=${encodeURIComponent(query.trim())}`);
     }
   };
 
@@ -59,25 +104,31 @@ export default function SearchBar({ large = false }) {
     if (!isOpen || allResults.length === 0) return;
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setHighlightIndex((i) => (i < allResults.length - 1 ? i + 1 : 0));
+      dispatch({
+        type: 'SET_HIGHLIGHT_INDEX',
+        payload: (i) => (i < allResults.length - 1 ? i + 1 : 0),
+      });
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setHighlightIndex((i) => (i > 0 ? i - 1 : allResults.length - 1));
+      dispatch({
+        type: 'SET_HIGHLIGHT_INDEX',
+        payload: (i) => (i > 0 ? i - 1 : allResults.length - 1),
+      });
     } else if (e.key === 'Enter' && highlightIndex >= 0) {
       e.preventDefault();
       const item = allResults[highlightIndex];
-      setIsOpen(false);
-      setQuery('');
-      router.push(item.href);
+      dispatch({ type: 'SET_OPEN', payload: false });
+      dispatch({ type: 'SET_QUERY', payload: '' });
+      push(item.href);
     } else if (e.key === 'Escape') {
-      setIsOpen(false);
+      dispatch({ type: 'SET_OPEN', payload: false });
     }
   };
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        setIsOpen(false);
+        dispatch({ type: 'SET_OPEN', payload: false });
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -103,7 +154,7 @@ export default function SearchBar({ large = false }) {
         <div className={`relative flex items-center glass ${large ? 'rounded-2xl' : 'rounded-xl'} transition-all duration-300 focus-within:border-primary/40 focus-within:shadow-lg focus-within:shadow-primary/10`}>
           {/* Search icon */}
           <div className="pl-4 text-text-secondary" aria-hidden="true">
-            <svg className={`${large ? 'w-6 h-6' : 'w-5 h-5'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className={`${large ? 'size-6' : 'size-5'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
@@ -112,21 +163,20 @@ export default function SearchBar({ large = false }) {
             ref={inputRef}
             type="text"
             value={query}
-            onChange={handleChange}
+            onChange={handleQueryChange}
             onKeyDown={handleKeyDown}
-            onFocus={() => query.trim().length >= 2 && allResults.length > 0 && setIsOpen(true)}
-            placeholder='Describe your situation... e.g. "landlord not returning deposit"'
+            onFocus={() => query.trim().length >= 2 && allResults.length > 0 && dispatch({ type: 'SET_OPEN', payload: true })}
+            placeholder='Describe your situation… e.g. "landlord not returning deposit"'
             className={`w-full bg-transparent border-none outline-none ${large ? 'px-4 py-4 text-base sm:text-lg' : 'px-3 py-3 text-sm sm:text-base'} text-text-primary placeholder:text-text-secondary/60`}
             aria-label="Search"
             aria-autocomplete="list"
             aria-controls="search-results"
             aria-expanded={isOpen}
-            role="combobox"
           />
 
           {isLoading && (
             <div className="pr-4" aria-hidden="true">
-              <div className="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+              <div className="size-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
             </div>
           )}
 
@@ -134,15 +184,13 @@ export default function SearchBar({ large = false }) {
             <button
               type="button"
               onClick={() => {
-                setQuery('');
-                setResults({ rights: [], templates: [], helplines: [] });
-                setIsOpen(false);
+                dispatch({ type: 'CLEAR_SEARCH' });
                 inputRef.current?.focus();
               }}
               className="pr-4 text-text-secondary hover:text-text-primary transition-colors"
               aria-label="Clear search"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -172,9 +220,9 @@ export default function SearchBar({ large = false }) {
                       role="option"
                       aria-selected={highlightIndex === idx}
                       onClick={() => {
-                        setIsOpen(false);
-                        setQuery('');
-                        router.push(`/rights/${r.id}`);
+                        dispatch({ type: 'SET_OPEN', payload: false });
+                        dispatch({ type: 'SET_QUERY', payload: '' });
+                        push(`/rights/${r.id}`);
                       }}
                       className={`w-full text-left px-5 py-3 border-b border-primary/5 last:border-0 flex items-center justify-between gap-4 transition-all ${
                         highlightIndex === idx ? 'bg-primary/15 pl-6' : 'hover:bg-surface-light/50 hover:pl-6'
@@ -185,7 +233,7 @@ export default function SearchBar({ large = false }) {
                         <p className="text-xs text-text-secondary truncate">{r.description}</p>
                       </div>
                       <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                        <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                       </span>
                     </button>
                   );
@@ -209,9 +257,9 @@ export default function SearchBar({ large = false }) {
                       role="option"
                       aria-selected={highlightIndex === idx}
                       onClick={() => {
-                        setIsOpen(false);
-                        setQuery('');
-                        router.push('/templates');
+                        dispatch({ type: 'SET_OPEN', payload: false });
+                        dispatch({ type: 'SET_QUERY', payload: '' });
+                        push('/templates');
                       }}
                       className={`w-full text-left px-5 py-3 border-b border-primary/5 last:border-0 flex items-center justify-between gap-4 transition-all ${
                         highlightIndex === idx ? 'bg-primary/15 pl-6' : 'hover:bg-surface-light/50 hover:pl-6'
@@ -244,9 +292,9 @@ export default function SearchBar({ large = false }) {
                       role="option"
                       aria-selected={highlightIndex === idx}
                       onClick={() => {
-                        setIsOpen(false);
-                        setQuery('');
-                        router.push('/helplines');
+                        dispatch({ type: 'SET_OPEN', payload: false });
+                        dispatch({ type: 'SET_QUERY', payload: '' });
+                        push('/helplines');
                       }}
                       className={`w-full text-left px-5 py-3 border-b border-primary/5 last:border-0 flex items-center justify-between gap-4 transition-all ${
                         highlightIndex === idx ? 'bg-primary/15 pl-6' : 'hover:bg-surface-light/50 hover:pl-6'
@@ -257,7 +305,7 @@ export default function SearchBar({ large = false }) {
                         <p className="text-xs text-text-secondary truncate">Call: <span className="font-bold text-success">{h.number}</span></p>
                       </div>
                       <span className="shrink-0">
-                        <svg className="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                        <svg className="size-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                       </span>
                     </button>
                   );
@@ -270,13 +318,13 @@ export default function SearchBar({ large = false }) {
           <div className="bg-surface border-t border-primary/20 sticky bottom-0">
             <button
               onClick={() => {
-                setIsOpen(false);
-                router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+                dispatch({ type: 'SET_OPEN', payload: false });
+                push(`/search?q=${encodeURIComponent(query.trim())}`);
               }}
               className="w-full text-center text-sm font-semibold text-primary hover:text-primary-light hover:bg-primary/10 transition-colors py-4 flex items-center justify-center gap-2"
             >
               See all {allResults.length} results
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </button>
           </div>
         </div>

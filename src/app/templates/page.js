@@ -26,7 +26,7 @@ export default function TemplatesPage() {
       </Link>
       
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-5xl font-bold text-text-primary mb-4">Legal Document Templates</h1>
+        <h1 className="text-3xl md:text-5xl font-semibold text-text-primary mb-4">Legal Document Templates</h1>
         <p className="text-lg text-text-secondary max-w-2xl mx-auto">
           Ready-to-use, legally sound templates for complaints, notices, and applications. Just fill in the blanks and you're ready to take action.
         </p>

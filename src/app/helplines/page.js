@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { helplines } from '@/data';
@@ -27,7 +27,7 @@ export default function HelplinesPage() {
       </Link>
       
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-5xl font-bold text-text-primary mb-4">Emergency Helplines & Legal Aid</h1>
+        <h1 className="text-3xl md:text-5xl font-semibold text-text-primary mb-4">Emergency Helplines & Legal Aid</h1>
         <p className="text-lg text-text-secondary max-w-2xl mx-auto">
           Verified contact numbers for immediate assistance, reporting crimes, or seeking free legal advice.
         </p>
@@ -36,10 +36,10 @@ export default function HelplinesPage() {
       {/* Immediate Emergency Section */}
       <section className="mb-16">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <h2 className="text-xl font-bold text-danger flex items-center gap-2">
-            <span className="relative flex h-3 w-3">
+          <h2 className="text-xl font-semibold text-danger flex items-center gap-2">
+            <span className="relative flex size-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-danger"></span>
+              <span className="relative inline-flex rounded-full size-3 bg-danger"></span>
             </span>
             Critical Emergency Numbers
           </h2>
@@ -55,7 +55,7 @@ export default function HelplinesPage() {
       {/* Directory Section */}
       <section>
         <div className="flex flex-col md:flex-row gap-4 mb-8 items-start md:items-center justify-between">
-          <h2 className="text-2xl font-bold text-text-primary">Helpline Directory</h2>
+          <h2 className="text-2xl font-semibold text-text-primary">Helpline Directory</h2>
           
           <div className="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto scrollbar-hide">
             {categories.map(cat => (
@@ -83,7 +83,7 @@ export default function HelplinesPage() {
 
       {/* Legal Aid Info */}
       <section className="mt-16 glass p-8 border-accent/30">
-        <h2 className="text-2xl font-bold text-text-primary mb-4">Free Legal Aid (NALSA)</h2>
+        <h2 className="text-2xl font-semibold text-text-primary mb-4">Free Legal Aid (NALSA)</h2>
         <p className="text-text-secondary mb-4">
           Under the Legal Services Authorities Act, 1987, certain categories of citizens are entitled to free legal services (lawyers, court fees, etc.) across India.
         </p>

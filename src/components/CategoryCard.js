@@ -24,7 +24,7 @@ export default function CategoryCard({ category }) {
 
       <div className="relative z-10">
         {/* Icon with gradient bounce */}
-        <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+        <div className="size-14 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
           style={{
             background: `linear-gradient(135deg, ${color}20, ${color}05)`,
             border: `1px solid ${color}30`,
@@ -35,7 +35,7 @@ export default function CategoryCard({ category }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-text-primary mb-3 font-[family-name:var(--font-outfit)] transition-colors duration-300"
+        <h3 className="text-xl font-semibold text-text-primary mb-3 font-[family-name:var(--font-outfit)] transition-colors duration-300"
         >
           {title}
         </h3>
@@ -58,11 +58,11 @@ export default function CategoryCard({ category }) {
             {count} Rights
           </span>
           <span 
-            className="w-8 h-8 rounded-full flex items-center justify-center text-text-secondary group-hover:text-white transition-all duration-300 group-hover:translate-x-1" 
+            className="size-8 rounded-full flex items-center justify-center text-text-secondary group-hover:text-white transition-all duration-300 group-hover:translate-x-1" 
             style={{ backgroundColor: 'transparent' }}
             aria-hidden="true"
           >
-            <svg className="w-4 h-4 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="size-4 transition-transform duration-300 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
             </svg>
           </span>

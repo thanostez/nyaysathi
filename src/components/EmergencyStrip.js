@@ -14,9 +14,9 @@ export default function EmergencyStrip() {
     <section className="relative py-4 overflow-hidden bg-danger/5 border-y border-danger/20" aria-label="Emergency helplines">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-center gap-3 mb-3 sm:mb-0 sm:absolute sm:left-6 sm:top-1/2 sm:-translate-y-1/2 sm:z-10">
-          <span className="relative flex h-2.5 w-2.5 shrink-0">
+          <span className="relative flex size-2.5 shrink-0">
             <span className="absolute inline-flex h-full w-full rounded-full bg-danger opacity-75 animate-ping" aria-hidden="true" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-danger" aria-hidden="true" />
+            <span className="relative inline-flex size-2.5 rounded-full bg-danger" aria-hidden="true" />
           </span>
           <span className="text-xs font-bold uppercase tracking-wider text-danger">
             Emergency

@@ -19,7 +19,7 @@ export default function TrafficFinesPage() {
         
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <span className="inline-block text-4xl mb-4">🚦</span>
-          <h1 className="text-3xl sm:text-4xl font-bold text-text-primary mb-3 font-[family-name:var(--font-outfit)]">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-text-primary mb-3 font-[family-name:var(--font-outfit)]">
             Traffic Fines & RTO Rules
           </h1>
           <p className="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
@@ -32,7 +32,7 @@ export default function TrafficFinesPage() {
         {/* Search Bar */}
         <div className="mb-8 relative max-w-2xl mx-auto">
           <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-text-secondary">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>

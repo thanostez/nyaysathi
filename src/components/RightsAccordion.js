@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -107,7 +107,7 @@ export default function RightsAccordion({ rights }) {
                     <div className="bg-surface/50 rounded-lg p-3">
                       <p className="text-sm font-medium text-text-primary">
                         {right.relevantLaw.act}
-                        {right.relevantLaw.section && ` — ${right.relevantLaw.section}`}
+                        {right.relevantLaw.section && ` - ${right.relevantLaw.section}`}
                       </p>
                       {right.relevantLaw.description && (
                         <p className="text-xs text-text-secondary mt-1">

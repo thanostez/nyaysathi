@@ -7,10 +7,50 @@ import { notFound } from 'next/navigation';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
+function LivePreviewText({ template, formData }) {
+  if (!template) return null;
+  
+  const regex = /(?:\[|<)(.*?)(?:\]|>)/g;
+  const text = template.templateText;
+  const elements = [];
+  let lastIndex = 0;
+  let match;
+  
+  regex.lastIndex = 0;
+  let keyIdx = 0;
+  
+  while ((match = regex.exec(text)) !== null) {
+    const matchIndex = match.index;
+    const fieldName = match[1];
+    
+    if (matchIndex > lastIndex) {
+      elements.push(text.slice(lastIndex, matchIndex));
+    }
+    
+    const value = formData[fieldName] || `[${fieldName}]`;
+    elements.push(
+      <span key={`field-${fieldName}-${keyIdx++}`} className="bg-accent/20 text-accent px-1 rounded font-semibold">
+        {value}
+      </span>
+    );
+    
+    lastIndex = regex.lastIndex;
+  }
+  
+  if (lastIndex < text.length) {
+    elements.push(text.slice(lastIndex));
+  }
+  
+  return <>{elements}</>;
+}
+
 export default function DocumentGenerator({ params }) {
-  const [template, setTemplate] = useState(null);
-  const [fields, setFields] = useState([]);
-  const [formData, setFormData] = useState({});
+  const [docState, setDocState] = useState({
+    template: null,
+    fields: [],
+    formData: {},
+  });
+  const { template, fields, formData } = docState;
   const [isGenerating, setIsGenerating] = useState(false);
   const documentRef = useRef(null);
 
@@ -28,37 +68,34 @@ export default function DocumentGenerator({ params }) {
         return;
       }
       
-      setTemplate(t);
-      
       // Extract placeholders like [Your Name] or <Date>
       const regex = /(?:\[|<)(.*?)(?:\]|>)/g;
       const matches = [...t.templateText.matchAll(regex)];
       const uniqueFields = [...new Set(matches.map(m => m[1]))];
       
-      setFields(uniqueFields);
-      
       const initialData = {};
       uniqueFields.forEach(f => { initialData[f] = ''; });
-      setFormData(initialData);
+
+      setDocState({
+        template: t,
+        fields: uniqueFields,
+        formData: initialData,
+      });
     };
 
     loadTemplate();
   }, [params]);
 
-  if (!template) return <div className="min-h-screen pt-24 pb-12 flex items-center justify-center">Loading...</div>;
+  if (!template) return <div className="min-h-screen pt-24 pb-12 flex items-center justify-center">Loading…</div>;
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setDocState(prev => ({
+      ...prev,
+      formData: { ...prev.formData, [field]: value }
+    }));
   };
 
-  // Generate the live text by replacing placeholders
-  let liveText = template.templateText;
-  fields.forEach(field => {
-    const value = formData[field] || `[${field}]`;
-    // Replace all instances
-    const regex = new RegExp(`(?:\\[|<)(${field})(?:\\]|>)`, 'g');
-    liveText = liveText.replace(regex, `<span class="bg-accent/20 text-accent px-1 rounded">${value}</span>`);
-  });
+
 
   // Generate pure text for PDF
   let pdfText = template.templateText;
@@ -122,10 +159,10 @@ export default function DocumentGenerator({ params }) {
       </Link>
       
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-4xl font-bold text-text-primary mb-2">{template.title}</h1>
+        <h1 className="text-2xl sm:text-4xl font-semibold text-text-primary mb-2">{template.title}</h1>
         <p className="text-text-secondary">Fill in the details below to generate your legal document.</p>
       </div>
-
+ 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Form Section */}
         <div className="glass p-6 sm:p-8 rounded-2xl h-fit">
@@ -151,17 +188,17 @@ export default function DocumentGenerator({ params }) {
               ))}
             </div>
           )}
-
+ 
           <button
             onClick={downloadPDF}
             disabled={isGenerating}
             className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 disabled:opacity-50"
           >
             {isGenerating ? (
-              <span className="animate-pulse">Generating PDF...</span>
+              <span className="animate-pulse">Generating PDF…</span>
             ) : (
               <>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 Download PDF
@@ -169,22 +206,23 @@ export default function DocumentGenerator({ params }) {
             )}
           </button>
         </div>
-
+ 
         {/* Live Preview Section */}
         <div className="glass p-6 sm:p-8 rounded-2xl border border-primary/10 bg-surface/30">
           <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
             Live Preview
-            <span className="relative flex h-3 w-3">
+            <span className="relative flex size-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-success"></span>
+              <span className="relative inline-flex rounded-full size-3 bg-success"></span>
             </span>
           </h3>
           
           <div 
             ref={documentRef}
             className="prose prose-invert max-w-none text-sm sm:text-base leading-relaxed text-text-secondary whitespace-pre-wrap font-sans bg-bg-dark/50 p-6 rounded-xl border border-surface-light"
-            dangerouslySetInnerHTML={{ __html: liveText }}
-          />
+          >
+            <LivePreviewText template={template} formData={formData} />
+          </div>
         </div>
       </div>
     </div>

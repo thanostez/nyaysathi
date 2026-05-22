@@ -20,7 +20,7 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-surface border-t border-primary/10" role="contentinfo">
+    <footer className="bg-surface border-t border-primary/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
@@ -96,7 +96,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-primary/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-text-secondary">
+          <p className="text-xs text-text-secondary" suppressHydrationWarning>
             © {new Date().getFullYear()} NyaySathi. Open-source legal awareness project.
           </p>
           <div className="flex items-center gap-4">

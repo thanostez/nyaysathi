@@ -25,7 +25,7 @@ export default async function CategoryPage({ params }) {
   if (!category) {
     return (
       <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold text-text-primary mb-4">Category Not Found</h1>
+        <h1 className="text-3xl font-semibold text-text-primary mb-4">Category Not Found</h1>
         <Link href="/" className="text-accent hover:text-accent-light transition-colors">
           &larr; Back to Home
         </Link>
@@ -42,7 +42,7 @@ export default async function CategoryPage({ params }) {
       <div className="glass p-8 mb-12" style={{ borderColor: `${category.color}40` }}>
         <div className="flex items-center gap-4 mb-4">
           <span className="text-5xl">{category.icon}</span>
-          <h1 className="text-3xl md:text-4xl font-bold text-text-primary">{category.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary">{category.title}</h1>
         </div>
         <p className="text-lg text-text-secondary max-w-3xl">{category.description}</p>
         <div className="mt-4 inline-block px-3 py-1 rounded-full bg-surface-light border border-primary/20 text-sm text-text-secondary">
@@ -52,7 +52,7 @@ export default async function CategoryPage({ params }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
-          <h2 className="text-2xl font-bold text-text-primary mb-6">Know Your Rights</h2>
+          <h2 className="text-2xl font-semibold text-text-primary mb-6">Know Your Rights</h2>
           <div className="space-y-4">
             <RightsAccordion rights={rights} />
           </div>
@@ -60,7 +60,7 @@ export default async function CategoryPage({ params }) {
         
         <div className="lg:col-span-1 space-y-6">
           <div className="glass p-6">
-            <h3 className="text-xl font-bold text-text-primary mb-4 flex items-center gap-2">
+            <h3 className="text-xl font-semibold text-text-primary mb-4 flex items-center gap-2">
               <span className="text-accent">💡</span> Need to take action?
             </h3>
             <p className="text-text-secondary mb-6 text-sm">
@@ -75,7 +75,7 @@ export default async function CategoryPage({ params }) {
           </div>
           
           <div className="glass p-6 border-danger/30">
-            <h3 className="text-xl font-bold text-text-primary mb-4 flex items-center gap-2">
+            <h3 className="text-xl font-semibold text-text-primary mb-4 flex items-center gap-2">
               <span className="text-danger">📞</span> Emergency?
             </h3>
             <p className="text-text-secondary mb-6 text-sm">

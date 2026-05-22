@@ -34,16 +34,19 @@ export default function Navbar() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  // Sync state with pathname changes during the render phase
+  const prevPathnameRef = useRef(pathname);
+  if (pathname !== prevPathnameRef.current) {
+    prevPathnameRef.current = pathname;
+    setCategoriesOpen(false);
+  }
+
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    setCategoriesOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -76,7 +79,7 @@ export default function Navbar() {
           className="flex items-center gap-2 text-xl font-bold font-[family-name:var(--font-outfit)] hover:scale-105 transition-transform"
           aria-label="NyaySathi Home"
         >
-          <Scale className="w-8 h-8 text-primary drop-shadow-md" aria-hidden="true" />
+          <Scale className="size-8 text-primary drop-shadow-md" aria-hidden="true" />
           <span className="gradient-text tracking-tight">NyaySathi</span>
         </Link>
 
@@ -109,7 +112,7 @@ export default function Navbar() {
               aria-haspopup="true"
             >
               Categories
-              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${categoriesOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`size-4 transition-transform duration-300 ${categoriesOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {categoriesOpen && (
@@ -143,7 +146,7 @@ export default function Navbar() {
             className="p-2.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/10 transition-all hover:scale-110"
             aria-label="Search"
           >
-            <Search className="w-5 h-5" />
+            <Search className="size-5" />
           </Link>
 
           {/* Theme Toggle */}
@@ -153,7 +156,7 @@ export default function Navbar() {
               className="p-2.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/10 transition-all hover:scale-110"
               aria-label="Toggle Dark Mode"
             >
-              {resolvedTheme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {resolvedTheme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
             </button>
           )}
 

@@ -10,17 +10,17 @@ import { Search, BookOpen, Zap, Car } from 'lucide-react';
 
 const howItWorks = [
   {
-    icon: <Search className="w-10 h-10 text-primary" />,
+    icon: <Search className="size-10 text-primary" />,
     title: 'Search',
     description: 'Describe your situation in plain language or browse categories to find the rights that apply to you.',
   },
   {
-    icon: <BookOpen className="w-10 h-10 text-accent" />,
+    icon: <BookOpen className="size-10 text-accent" />,
     title: 'Learn',
     description: 'Read easy-to-understand explanations of your legal rights, relevant laws, and what protections you have.',
   },
   {
-    icon: <Zap className="w-10 h-10 text-warning" />,
+    icon: <Zap className="size-10 text-warning" />,
     title: 'Act',
     description: 'Follow step-by-step action guides, use ready-made templates, and connect with helplines for support.',
   },
@@ -44,7 +44,7 @@ export default function HomePage() {
               className="w-full sm:w-auto flex items-center justify-center gap-4 px-6 py-4 rounded-xl glass hover:border-primary/50 hover:shadow-lg transition-all"
             >
               <div className="p-2 bg-primary/20 rounded-full text-primary">
-                <Car className="w-8 h-8" />
+                <Car className="size-8" />
               </div>
               <div className="text-left">
                 <div className="font-bold text-text-primary">Traffic Fines Lookup</div>
@@ -63,7 +63,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2
               id="categories-heading"
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold font-[family-name:var(--font-outfit)] mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-semibold font-[family-name:var(--font-outfit)] mb-4"
             >
               <span className="gradient-text">Know Your Rights</span> By Category
             </h2>
@@ -96,7 +96,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2
               id="how-it-works-heading"
-              className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-outfit)] mb-4"
+              className="text-2xl sm:text-3xl font-semibold font-[family-name:var(--font-outfit)] mb-4"
             >
               How <span className="gradient-text">NyaySathi</span> Works
             </h2>
@@ -114,7 +114,7 @@ export default function HomePage() {
                 <div className="text-4xl mb-4" aria-hidden="true">
                   {step.icon}
                 </div>
-                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary text-sm font-bold mb-3" aria-hidden="true">
+                <div className="inline-flex items-center justify-center size-8 rounded-full bg-primary/20 text-primary text-sm font-bold mb-3" aria-hidden="true">
                   {index + 1}
                 </div>
                 <h3 className="text-lg font-semibold text-text-primary font-[family-name:var(--font-outfit)] mb-2">

@@ -22,13 +22,13 @@ export default function Disclaimer() {
 
   return (
     <div
-      className="fixed bottom-24 md:bottom-0 left-0 right-0 z-40 animate-slide-up px-4 md:px-0"
+      className="fixed bottom-[92px] md:bottom-0 left-0 right-0 z-[60] animate-slide-up px-4 md:px-0"
       role="alert"
     >
       <div className="glass-strong border border-warning/20 md:border-b-0 md:border-x-0 md:border-t shadow-lg shadow-warning/5 rounded-2xl md:rounded-none">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
-            <AlertTriangle className="text-warning w-6 h-6 shrink-0" aria-hidden="true" />
+            <AlertTriangle className="text-warning size-6 shrink-0" aria-hidden="true" />
             <p className="text-xs sm:text-sm text-text-secondary">
               <span className="font-semibold text-warning">Disclaimer:</span>{' '}
               This platform provides general legal information only and does not constitute legal advice. Always consult a qualified lawyer for specific situations.
