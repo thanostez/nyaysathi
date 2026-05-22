@@ -30,7 +30,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-2 text-xl font-bold font-[family-name:var(--font-outfit)] mb-4 hover:opacity-80 transition-opacity">
               <span className="text-2xl" aria-hidden="true">⚖️</span>
-              <span className="gradient-text">NyaySathi</span>
+              <span className="gradient-text">NyayMitra</span>
             </Link>
             <p className="text-sm text-text-secondary leading-relaxed mb-4 max-w-xs">
               Empowering every Indian citizen to understand their legal rights in plain, simple language.
@@ -100,7 +100,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-primary/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-secondary" suppressHydrationWarning>
-            © {new Date().getFullYear()} NyaySathi. Open-source legal awareness project.
+            © {new Date().getFullYear()} NyayMitra. Open-source legal awareness project.
           </p>
           <div className="flex items-center gap-4">
             <span className="text-xs text-text-secondary">
@@ -112,3 +112,4 @@ export default function Footer() {
     </footer>
   );
 }
+

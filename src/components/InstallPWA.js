@@ -13,8 +13,8 @@ export default function InstallPWA() {
     deferredPromptRef.current = e;
 
     // Show after 30s or if second visit
-    const visits = parseInt(localStorage.getItem('nyaysathi-visit-count') || '0', 10) + 1;
-    localStorage.setItem('nyaysathi-visit-count', String(visits));
+    const visits = parseInt(localStorage.getItem('nyaymitra-visit-count') || '0', 10) + 1;
+    localStorage.setItem('nyaymitra-visit-count', String(visits));
 
     if (visits >= 2) {
       setShow(true);
@@ -30,7 +30,7 @@ export default function InstallPWA() {
 
   useEffect(() => {
     // Don't show if previously dismissed
-    const dismissed = localStorage.getItem('nyaysathi-pwa-dismissed');
+    const dismissed = localStorage.getItem('nyaymitra-pwa-dismissed');
     if (dismissed) return;
 
     // Check if already installed (standalone mode)
@@ -59,7 +59,7 @@ export default function InstallPWA() {
 
   const handleDismiss = () => {
     setShow(false);
-    localStorage.setItem('nyaysathi-pwa-dismissed', 'true');
+    localStorage.setItem('nyaymitra-pwa-dismissed', 'true');
   };
 
   if (!show) return null;
@@ -75,7 +75,7 @@ export default function InstallPWA() {
 
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-semibold text-text-primary mb-1">
-              Install NyaySathi
+              Install NyayMitra
             </h3>
             <p className="text-xs text-text-secondary leading-relaxed mb-3">
               Get quick access to your legal rights (works offline too!)
@@ -112,3 +112,4 @@ export default function InstallPWA() {
     </div>
   );
 }
+

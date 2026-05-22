@@ -1,6 +1,6 @@
 {
-  "name": "NyaySathi - Know Your Legal Rights",
-  "short_name": "NyaySathi",
+  "name": "NyayMitra - Know Your Legal Rights",
+  "short_name": "NyayMitra",
   "description": "Your legal rights assistant for India. Know your rights, find templates, and get help.",
   "start_url": "/",
   "display": "standalone",
@@ -21,3 +21,4 @@
     }
   ]
 }
+

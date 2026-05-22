@@ -22,7 +22,7 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: 'NyaySathi - Know Your Legal Rights',
+  title: 'NyayMitra - Know Your Legal Rights',
   description:
     'Your free legal rights assistant for India. Understand your rights, access legal templates, and find emergency helplines - all in plain language.',
   keywords: [
@@ -34,27 +34,27 @@ export const metadata = {
     'tenant rights',
     'women safety laws',
     'cyber crime',
-    'NyaySathi',
+    'NyayMitra',
   ],
-  authors: [{ name: 'NyaySathi' }],
+  authors: [{ name: 'NyayMitra' }],
   openGraph: {
-    title: 'NyaySathi - Know Your Legal Rights',
+    title: 'NyayMitra - Know Your Legal Rights',
     description:
       'Your free legal rights assistant for India. Understand your rights in plain language.',
     type: 'website',
     locale: 'en_IN',
-    siteName: 'NyaySathi',
+    siteName: 'NyayMitra',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NyaySathi - Know Your Legal Rights',
+    title: 'NyayMitra - Know Your Legal Rights',
     description:
       'Your free legal rights assistant for India. Understand your rights in plain language.',
   },
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
-    title: 'NyaySathi',
+    title: 'NyayMitra',
     statusBarStyle: 'black-translucent',
   },
   icons: {
@@ -97,3 +97,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

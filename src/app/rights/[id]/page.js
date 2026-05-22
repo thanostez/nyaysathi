@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   const { id } = await params;
   const right = getRightById(id);
   return {
-    title: `${right?.title || 'Right Details'} - NyaySathi`,
+    title: `${right?.title || 'Right Details'} - NyayMitra`,
     description: right?.description || 'Understand your legal rights.',
   };
 }
@@ -168,3 +168,4 @@ export default async function RightDetailPage({ params }) {
     </div>
   );
 }
+

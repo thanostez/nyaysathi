@@ -150,7 +150,7 @@ function SearchResultsContent({ query }) {
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Search rights, procedures, templates, or helplines…"
               className="w-full bg-transparent border-none outline-none p-4 text-base sm:text-lg text-text-primary placeholder:text-text-secondary/50 font-[family-name:var(--font-outfit)]"
-              aria-label="Search NyaySathi"
+              aria-label="Search NyayMitra"
             />
 
             {inputValue && (
@@ -178,7 +178,7 @@ function SearchResultsContent({ query }) {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-24">
           <div className="size-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-text-secondary font-medium animate-pulse">Searching NyaySathi database…</p>
+          <p className="text-text-secondary font-medium animate-pulse">Searching NyayMitra database…</p>
         </div>
       ) : !query.trim() ? (
         /* Blank/Initial state */
@@ -225,7 +225,7 @@ function SearchResultsContent({ query }) {
             <div>
               <h4 className="text-sm font-semibold text-text-primary mb-1">Confidential & Private</h4>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Your search queries are processed locally and securely. NyaySathi does not log your personal legal questions or queries. Use plain English or simple terms to find specific sections.
+                Your search queries are processed locally and securely. NyayMitra does not log your personal legal questions or queries. Use plain English or simple terms to find specific sections.
               </p>
             </div>
           </div>
@@ -353,4 +353,5 @@ export default function SearchPage() {
     </Suspense>
   );
 }
+
 

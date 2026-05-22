@@ -71,10 +71,10 @@ export default function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-2 text-xl font-bold font-[family-name:var(--font-outfit)] hover:scale-105 transition-transform"
-          aria-label="NyaySathi Home"
+          aria-label="NyayMitra Home"
         >
           <Scale className="size-8 text-primary drop-shadow-md" aria-hidden="true" />
-          <span className="gradient-text tracking-tight">NyaySathi</span>
+          <span className="gradient-text tracking-tight">NyayMitra</span>
         </Link>
 
         {/* Desktop navigation */}
@@ -163,3 +163,4 @@ export default function Navbar() {
     </header>
   );
 }
+

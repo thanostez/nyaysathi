@@ -6,12 +6,12 @@ import { AlertTriangle } from 'lucide-react';
 export default function Disclaimer() {
   const [dismissed, setDismissed] = useState(() => {
     if (typeof window === 'undefined') return true;
-    return Boolean(localStorage.getItem('nyaysathi-disclaimer-dismissed'));
+    return Boolean(localStorage.getItem('nyaymitra-disclaimer-dismissed'));
   });
 
   const handleDismiss = () => {
     setDismissed(true);
-    localStorage.setItem('nyaysathi-disclaimer-dismissed', 'true');
+    localStorage.setItem('nyaymitra-disclaimer-dismissed', 'true');
   };
 
   if (dismissed) return null;
@@ -42,3 +42,4 @@ export default function Disclaimer() {
     </div>
   );
 }
+

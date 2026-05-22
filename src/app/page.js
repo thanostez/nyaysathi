@@ -98,7 +98,7 @@ export default function HomePage() {
               id="how-it-works-heading"
               className="text-2xl sm:text-3xl font-semibold font-[family-name:var(--font-outfit)] mb-4"
             >
-              How <span className="gradient-text">NyaySathi</span> Works
+              How <span className="gradient-text">NyayMitra</span> Works
             </h2>
             <p className="text-text-secondary">
               Three simple steps to understanding your legal rights.
@@ -134,3 +134,4 @@ export default function HomePage() {
     </>
   );
 }
+

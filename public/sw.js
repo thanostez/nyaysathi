@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nyaysathi-cache-v1';
+const CACHE_NAME = 'nyaymitra-cache-v1';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -27,3 +27,4 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+

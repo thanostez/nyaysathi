@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const category = getCategoryBySlug(slug);
   return {
-    title: `${category?.title || 'Category'} Rights - NyaySathi`,
+    title: `${category?.title || 'Category'} Rights - NyayMitra`,
     description: category?.description || 'Learn about your legal rights.',
   };
 }
@@ -93,3 +93,4 @@ export default async function CategoryPage({ params }) {
     </div>
   );
 }
+
