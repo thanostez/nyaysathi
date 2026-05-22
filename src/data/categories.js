@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Briefcase, Home, ShoppingCart, ShieldAlert, 
-  Scale, Laptop, Users, GraduationCap 
+  Scale, Laptop, Users, GraduationCap, Landmark, HeartPulse, CreditCard
 } from 'lucide-react';
 
 const categories = [
@@ -12,7 +12,7 @@ const categories = [
     icon: <Briefcase />,
     description: 'Know your workplace rights — wages, termination, safety, harassment, and benefits under Indian labor laws.',
     color: '#2563EB',
-    count: 10,
+    count: 8,
   },
   {
     id: 'cat-tenant',
@@ -21,7 +21,7 @@ const categories = [
     icon: <Home />,
     description: 'Understand your rights as a tenant — rent control, eviction protection, deposits, and maintenance obligations.',
     color: '#16A34A',
-    count: 8,
+    count: 4,
   },
   {
     id: 'cat-consumer',
@@ -30,7 +30,7 @@ const categories = [
     icon: <ShoppingCart />,
     description: 'Fight defective products, misleading ads, overcharging, and unfair trade practices through consumer courts.',
     color: '#EA580C',
-    count: 8,
+    count: 5,
   },
   {
     id: 'cat-women-safety',
@@ -75,7 +75,34 @@ const categories = [
     icon: <GraduationCap />,
     description: 'Rights for students — anti-ragging, fee refunds, RTE, exam fairness, hostel safety, and campus justice.',
     color: '#CA8A04',
-    count: 8,
+    count: 4,
+  },
+  {
+    id: 'cat-government-services',
+    slug: 'government-services',
+    title: 'Government & Civic Rights',
+    icon: <Landmark />,
+    description: 'RTI, free legal aid, Aadhaar, disability access, senior citizen protection, and public grievance remedies.',
+    color: '#0F766E',
+    count: 6,
+  },
+  {
+    id: 'cat-health',
+    slug: 'health',
+    title: 'Health & Patient Rights',
+    icon: <HeartPulse />,
+    description: 'Emergency care, hospital records, mental healthcare, medical negligence, organ donation, and treatment consent.',
+    color: '#DC2626',
+    count: 6,
+  },
+  {
+    id: 'cat-banking-finance',
+    slug: 'banking-finance',
+    title: 'Banking & Finance',
+    icon: <CreditCard />,
+    description: 'UPI fraud, bank complaints, loan recovery harassment, insurance claims, credit reports, and digital payments.',
+    color: '#4F46E5',
+    count: 6,
   },
 ];
 

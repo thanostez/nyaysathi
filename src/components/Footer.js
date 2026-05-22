@@ -9,6 +9,9 @@ const footerCategories = [
   { href: '/categories/cyber-crime', label: 'Cyber Crime' },
   { href: '/categories/family', label: 'Family Law' },
   { href: '/categories/student', label: 'Student & Education' },
+  { href: '/categories/government-services', label: 'Government & Civic' },
+  { href: '/categories/health', label: 'Health & Patient' },
+  { href: '/categories/banking-finance', label: 'Banking & Finance' },
 ];
 
 const quickLinks = [

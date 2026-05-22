@@ -112,7 +112,7 @@ export default async function RightDetailPage({ params }) {
               <p className="font-semibold text-text-primary mb-1">{right.relevantLaw.act} ({right.relevantLaw.year})</p>
               <p className="text-accent text-sm font-medium mb-3">{right.relevantLaw.section}</p>
               <p className="text-sm text-text-secondary italic border-l-2 border-primary/30 pl-3">
-                "{right.relevantLaw.text}"
+                &quot;{right.relevantLaw.text}&quot;
               </p>
             </div>
           </section>

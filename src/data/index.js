@@ -7,6 +7,9 @@ import police from './rights/police';
 import cyberCrime from './rights/cyber-crime';
 import family from './rights/family';
 import student from './rights/student';
+import governmentServices from './rights/government-services';
+import health from './rights/health';
+import bankingFinance from './rights/banking-finance';
 import templates from './templates';
 import helplines from './helplines';
 import trafficFines from './traffic';
@@ -20,6 +23,9 @@ const rightsMap = {
   'cyber-crime': cyberCrime,
   family,
   student,
+  'government-services': governmentServices,
+  health,
+  'banking-finance': bankingFinance,
 };
 
 export function getAllRights() {

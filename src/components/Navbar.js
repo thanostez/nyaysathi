@@ -24,6 +24,9 @@ const categoryLinks = [
   { href: '/categories/cyber-crime', label: 'Cyber Crime' },
   { href: '/categories/family', label: 'Family Law' },
   { href: '/categories/student', label: 'Student & Education' },
+  { href: '/categories/government-services', label: 'Government & Civic' },
+  { href: '/categories/health', label: 'Health & Patient' },
+  { href: '/categories/banking-finance', label: 'Banking & Finance' },
 ];
 
 export default function Navbar() {
@@ -32,17 +35,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const dropdownRef = useRef(null);
   const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Sync state with pathname changes during the render phase
-  const prevPathnameRef = useRef(pathname);
-  if (pathname !== prevPathnameRef.current) {
-    prevPathnameRef.current = pathname;
-    setCategoriesOpen(false);
-  }
 
   useEffect(() => {
-    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -125,6 +119,7 @@ export default function Navbar() {
                     key={cat.href}
                     href={cat.href}
                     role="menuitem"
+                    onClick={() => setCategoriesOpen(false)}
                     className={`block px-5 py-3 text-sm font-medium transition-all ${
                       pathname === cat.href
                         ? 'text-primary bg-primary/10 pl-6 border-l-2 border-primary'
@@ -150,15 +145,14 @@ export default function Navbar() {
           </Link>
 
           {/* Theme Toggle */}
-          {mounted && (
-            <button
-              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-              className="p-2.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/10 transition-all hover:scale-110"
-              aria-label="Toggle Dark Mode"
-            >
-              {resolvedTheme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
-            </button>
-          )}
+          <button
+            onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+            className="p-2.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/10 transition-all hover:scale-110"
+            aria-label="Toggle Dark Mode"
+            suppressHydrationWarning
+          >
+            {resolvedTheme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          </button>
 
           {/* Language Translation (hidden on very small screens) */}
           <div className="hidden sm:block pl-2 border-l border-primary/10">

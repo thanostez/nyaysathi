@@ -24,7 +24,7 @@
       'Any evidence (photos, videos, medical reports)',
       'ID proof (optional but helpful)'
     ],
-    relatedTemplateId: 'police-complaint-refusal',
+    relatedTemplateId: 'fir-application',
     relatedRightsIds: ['police-zero-fir'],
     keywords: ['FIR', 'complaint', 'refusal', 'cognizable', 'report'],
     severity: 'high'

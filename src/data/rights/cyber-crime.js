@@ -24,8 +24,8 @@
       'Screenshots of SMS/emails/WhatsApp chats',
       'Transaction ID'
     ],
-    relatedTemplateId: 'cyber-crime-complaint',
-    relatedRightsIds: ['consumer-defective-product'],
+    relatedTemplateId: 'fir-application',
+    relatedRightsIds: ['consumer-defective-products'],
     keywords: ['fraud', 'scam', 'UPI', 'money lost', 'bank', '1930'],
     severity: 'high'
   },
@@ -53,7 +53,7 @@
       'Screenshots of the content and threats',
       'URLs of the websites where it was posted'
     ],
-    relatedTemplateId: 'cyber-crime-complaint',
+    relatedTemplateId: 'fir-application',
     relatedRightsIds: ['women-safety-stalking'],
     keywords: ['revenge porn', 'nudes', 'leaked', 'private photos', 'blackmail'],
     severity: 'high'
@@ -82,7 +82,7 @@
       'Screenshots of the abuse/harassment',
       'Links to the abusive profiles'
     ],
-    relatedTemplateId: 'cyber-crime-complaint',
+    relatedTemplateId: 'fir-application',
     relatedRightsIds: ['women-safety-stalking'],
     keywords: ['bullying', 'troll', 'abuse', 'harassment', 'fake profile'],
     severity: 'medium'

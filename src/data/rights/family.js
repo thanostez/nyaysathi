@@ -24,7 +24,7 @@
       'Any proof of abuse (messages, audio recordings, witness statements)',
       'Marriage certificate or proof of living together'
     ],
-    relatedTemplateId: 'domestic-violence-complaint',
+    relatedTemplateId: 'fir-application',
     relatedRightsIds: ['women-safety-dowry', 'family-maintenance'],
     keywords: ['domestic violence', 'abuse', 'beating', 'husband', 'in-laws', 'residence right'],
     severity: 'high'
@@ -53,7 +53,7 @@
       'Details of husband\'s income and assets',
       'Details of your own income/expenses and children\'s expenses'
     ],
-    relatedTemplateId: 'maintenance-petition',
+    relatedTemplateId: null,
     relatedRightsIds: ['family-divorce'],
     keywords: ['maintenance', 'alimony', 'financial support', 'money', 'expenses'],
     severity: 'high'
@@ -141,7 +141,7 @@
       'Death certificate of the ancestor (if applicable)',
       'Proof of relationship (birth certificate)'
     ],
-    relatedTemplateId: 'legal-notice-general',
+    relatedTemplateId: null,
     relatedRightsIds: [],
     keywords: ['property', 'inheritance', 'daughter', 'ancestral', 'share'],
     severity: 'medium'

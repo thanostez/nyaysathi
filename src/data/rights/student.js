@@ -23,7 +23,7 @@
       'Written complaint detailing names, dates, and incidents',
       'Screenshots of messages (if cyber-ragging)'
     ],
-    relatedTemplateId: 'anti-ragging-complaint',
+    relatedTemplateId: null,
     relatedRightsIds: ['cyber-bullying'],
     keywords: ['ragging', 'bullying', 'seniors', 'hostel', 'college'],
     severity: 'high'
@@ -53,8 +53,8 @@
       'Admission withdrawal application',
       'Prospectus/Rules of the college (showing refund policy)'
     ],
-    relatedTemplateId: 'legal-notice-general',
-    relatedRightsIds: ['consumer-defective-product'],
+    relatedTemplateId: 'consumer-notice',
+    relatedRightsIds: ['consumer-defective-products'],
     keywords: ['fee', 'refund', 'admission', 'withdrawal', 'certificates', 'UGC'],
     severity: 'medium'
   },

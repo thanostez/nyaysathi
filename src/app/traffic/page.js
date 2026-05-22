@@ -23,7 +23,7 @@ export default function TrafficFinesPage() {
             Traffic Fines & RTO Rules
           </h1>
           <p className="text-text-secondary text-base sm:text-lg max-w-2xl mx-auto">
-            Know the latest official penalties under the Motor Vehicles Act. Don't get overcharged.
+            Know the latest official penalties under the Motor Vehicles Act. Don&apos;t get overcharged.
           </p>
         </div>
       </div>

@@ -174,7 +174,7 @@ export default function AllRightsPage() {
               <span className="text-4xl mb-4 block">🔍</span>
               <h3 className="text-lg font-semibold text-text-primary mb-2">No matching rights found</h3>
               <p className="text-text-secondary max-w-md mx-auto mb-6 text-sm">
-                We couldn't find any rights matching your current search or category selections. Try adjusting your inputs.
+                We couldn&apos;t find any rights matching your current search or category selections. Try adjusting your inputs.
               </p>
               <button
                 onClick={handleReset}

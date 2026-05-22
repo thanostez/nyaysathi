@@ -20,18 +20,13 @@ const languages = [
 ];
 
 export default function LanguageTranslate() {
-  const [currentLang, setCurrentLang] = useState('en');
+  const [currentLang, setCurrentLang] = useState(() => {
+    if (typeof document === 'undefined') return 'en';
+    const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
+    return match?.[1]?.split('/')[2] || 'en';
+  });
 
   useEffect(() => {
-    // Read the current language from the googtrans cookie on mount
-    const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
-    if (match && match[1]) {
-      const code = match[1].split('/')[2]; // e.g. "/en/hi" -> "hi"
-      if (code) {
-        setCurrentLang(code);
-      }
-    }
-
     // Initialize the hidden Google Translate engine
     window.googleTranslateElementInit = () => {
       if (window.google && window.google.translate) {

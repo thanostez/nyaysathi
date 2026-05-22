@@ -171,7 +171,6 @@ export default function SearchBar({ large = false }) {
             aria-label="Search"
             aria-autocomplete="list"
             aria-controls="search-results"
-            aria-expanded={isOpen}
           />
 
           {isLoading && (

@@ -1,17 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AlertTriangle } from 'lucide-react';
 
 export default function Disclaimer() {
-  const [dismissed, setDismissed] = useState(true); // Start hidden, show after mount check
-
-  useEffect(() => {
-    const stored = localStorage.getItem('nyaysathi-disclaimer-dismissed');
-    if (!stored) {
-      setDismissed(false);
-    }
-  }, []);
+  const [dismissed, setDismissed] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return Boolean(localStorage.getItem('nyaysathi-disclaimer-dismissed'));
+  });
 
   const handleDismiss = () => {
     setDismissed(true);
