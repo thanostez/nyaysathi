@@ -1,6 +1,6 @@
 import { blogCategories, blogPosts, categories, getAllRights, guides, templates } from '@/data';
 
-const baseUrl = 'https://www.nyaymitra.help';
+const baseUrl = 'https://nyaymitra.help';
 
 function entry(path, changeFrequency, priority) {
   return {
