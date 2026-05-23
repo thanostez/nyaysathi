@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }) {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://nyaymitra.help/blog/${post.slug}`,
+      '@id': `https://www.nyaymitra.help/blog/${post.slug}`,
     },
   };
 

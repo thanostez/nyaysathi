@@ -46,22 +46,41 @@ export default async function GuideDetailPage({ params }) {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: guide.searchTitle,
-    description: guide.description,
-    dateModified: guide.updated,
-    author: {
-      '@type': 'Organization',
-      name: 'NyayMitra',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'NyayMitra',
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://nyaymitra.help/guides/${guide.slug}`,
-    },
+    '@graph': [
+      {
+        '@type': 'Article',
+        headline: guide.searchTitle,
+        description: guide.description,
+        dateModified: guide.updated,
+        author: {
+          '@type': 'Organization',
+          name: 'NyayMitra',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'NyayMitra',
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://www.nyaymitra.help/guides/${guide.slug}`,
+        },
+      },
+      ...(guide.faqs
+        ? [
+            {
+              '@type': 'FAQPage',
+              mainEntity: guide.faqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+    ],
   };
 
   return (
@@ -132,6 +151,22 @@ export default async function GuideDetailPage({ params }) {
             </section>
           ))}
         </div>
+
+        {guide.faqs && guide.faqs.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-text-primary mb-5 font-[family-name:var(--font-outfit)]">
+              Frequently asked questions
+            </h2>
+            <div className="space-y-4">
+              {guide.faqs.map((faq) => (
+                <div key={faq.question} className="glass p-5 rounded-2xl border border-primary/10">
+                  <h3 className="text-lg font-semibold text-text-primary mb-2">{faq.question}</h3>
+                  <p className="text-text-secondary leading-relaxed">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
           <section className="glass p-6 rounded-2xl border border-primary/10">

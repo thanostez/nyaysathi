@@ -35,7 +35,7 @@ export default function AllRightsPage() {
   };
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-8 lg:px-12 w-full mx-auto">
       {/* Header section with background glow */}
       <div className="relative mb-12 text-center py-10 rounded-3xl glass border border-surface-light overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 size-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />

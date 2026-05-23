@@ -153,7 +153,7 @@ export default function DocumentGenerator({ params }) {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 max-w-7xl mx-auto">
+    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-8 lg:px-12 w-full mx-auto">
       <Link href="/templates" className="inline-flex items-center text-text-secondary hover:text-text-primary mb-6 transition-colors">
         &larr; Back to Templates
       </Link>

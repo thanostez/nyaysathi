@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect, useRef } from 'react';
 
@@ -63,7 +63,7 @@ export default function StatsBar() {
 
   return (
     <section ref={ref} className="py-16 sm:py-20" aria-label="Platform statistics">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-8 lg:px-12">
         <div className="glass rounded-2xl p-8 sm:p-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 text-center">
             {stats.map((stat) => (

@@ -17,7 +17,7 @@ export default function TrafficFinesPage() {
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-30" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-32 bg-accent/10 blur-[60px] rounded-full pointer-events-none" />
         
-        <div className="max-w-4xl mx-auto relative z-10 text-center">
+        <div className="w-full max-w-[1600px] mx-auto relative z-10 text-center">
           <span className="inline-block text-4xl mb-4">🚦</span>
           <h1 className="text-3xl sm:text-4xl font-semibold text-text-primary mb-3 font-[family-name:var(--font-outfit)]">
             Traffic Fines & RTO Rules
@@ -28,7 +28,7 @@ export default function TrafficFinesPage() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 pt-8">
         {/* Search Bar */}
         <div className="mb-8 relative max-w-2xl mx-auto">
           <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-text-secondary">

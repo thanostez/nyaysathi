@@ -34,7 +34,7 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-8 lg:px-12 w-full mx-auto">
       <header className="mb-10">
         <span className="text-xs font-semibold text-primary uppercase tracking-wider">Terms</span>
         <h1 className="text-3xl sm:text-4xl font-semibold font-[family-name:var(--font-outfit)] text-text-primary mt-3 mb-4">

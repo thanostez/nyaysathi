@@ -1,4 +1,10 @@
-﻿import { searchRights, searchTemplates, searchHelplines } from '@/data';
+import {
+  searchBlogPosts,
+  searchGuides,
+  searchHelplines,
+  searchRights,
+  searchTemplates,
+} from '@/data';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -6,12 +12,20 @@ export async function GET(request) {
   const query = searchParams.get('q');
 
   if (!query) {
-    return NextResponse.json({ rights: [], templates: [], helplines: [] });
+    return NextResponse.json({
+      rights: [],
+      templates: [],
+      helplines: [],
+      guides: [],
+      blogPosts: [],
+    });
   }
 
   const rights = searchRights(query);
   const templates = searchTemplates(query);
   const helplines = searchHelplines(query);
+  const guides = searchGuides(query);
+  const blogPosts = searchBlogPosts(query);
 
-  return NextResponse.json({ rights, templates, helplines });
+  return NextResponse.json({ rights, templates, helplines, guides, blogPosts });
 }

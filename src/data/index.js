@@ -79,6 +79,40 @@ export function searchHelplines(query) {
   );
 }
 
+export function searchGuides(query) {
+  const q = query.toLowerCase();
+  return guides.filter((guide) =>
+    guide.title.toLowerCase().includes(q) ||
+    guide.searchTitle.toLowerCase().includes(q) ||
+    guide.description.toLowerCase().includes(q) ||
+    guide.category.toLowerCase().includes(q) ||
+    guide.keywords.some((keyword) => keyword.toLowerCase().includes(q)) ||
+    guide.sections.some((section) =>
+      section.heading.toLowerCase().includes(q) ||
+      section.body.toLowerCase().includes(q)
+    )
+  );
+}
+
+export function searchBlogPosts(query) {
+  const q = query.toLowerCase();
+  return blogPosts.filter((post) => {
+    const category = getBlogCategoryBySlug(post.categorySlug);
+
+    return (
+      post.title.toLowerCase().includes(q) ||
+      post.excerpt.toLowerCase().includes(q) ||
+      post.intro.toLowerCase().includes(q) ||
+      post.keywords.some((keyword) => keyword.toLowerCase().includes(q)) ||
+      category?.title.toLowerCase().includes(q) ||
+      post.sections.some((section) =>
+        section.heading.toLowerCase().includes(q) ||
+        section.body.toLowerCase().includes(q)
+      )
+    );
+  });
+}
+
 export function searchTrafficFines(query) {
   const q = query.toLowerCase();
   return trafficFines.filter(tf =>

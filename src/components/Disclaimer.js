@@ -22,7 +22,7 @@ export default function Disclaimer() {
       role="alert"
     >
       <div className="glass-strong border border-warning/20 md:border-b-0 md:border-x-0 md:border-t shadow-lg shadow-warning/5 rounded-2xl md:rounded-none">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+        <div className="mx-auto w-full px-4 sm:px-8 lg:px-12 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
             <AlertTriangle className="text-warning size-6 shrink-0" aria-hidden="true" />
             <p className="text-xs sm:text-sm text-text-secondary">

@@ -1,4 +1,4 @@
-const baseUrl = 'https://nyaymitra.help';
+const baseUrl = 'https://www.nyaymitra.help';
 
 export default function robots() {
   return {

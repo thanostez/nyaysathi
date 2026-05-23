@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 const initialState = {
   query: '',
-  results: { rights: [], templates: [], helplines: [] },
+  results: { rights: [], templates: [], helplines: [], guides: [], blogPosts: [] },
   isOpen: false,
   isLoading: false,
   highlightIndex: -1,
@@ -29,14 +29,14 @@ function searchReducer(state, action) {
       return {
         ...state,
         isLoading: false,
-        results: { rights: [], templates: [], helplines: [] },
+        results: { rights: [], templates: [], helplines: [], guides: [], blogPosts: [] },
         highlightIndex: -1,
       };
     case 'CLEAR_SEARCH':
       return {
         ...state,
         query: '',
-        results: { rights: [], templates: [], helplines: [] },
+        results: { rights: [], templates: [], helplines: [], guides: [], blogPosts: [] },
         isOpen: false,
         highlightIndex: -1,
       };
@@ -65,6 +65,8 @@ export default function SearchBar({ large = false }) {
   const { push } = useRouter();
 
   const allResults = [
+    ...results.guides.map((g) => ({ ...g, type: 'guide', href: `/guides/${g.slug}` })),
+    ...results.blogPosts.map((p) => ({ ...p, type: 'blog', href: `/blog/${p.slug}` })),
     ...results.rights.map((r) => ({ ...r, type: 'right', href: `/rights/${r.id}` })),
     ...results.templates.map((t) => ({ ...t, type: 'template', href: '/templates' })),
     ...results.helplines.map((h) => ({ ...h, type: 'helpline', href: '/helplines' })),
@@ -234,6 +236,44 @@ export default function SearchBar({ large = false }) {
                       <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                         <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                       </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {(results.guides.length > 0 || results.blogPosts.length > 0) && (
+            <div className="py-2 border-t border-primary/10">
+              <div className="px-5 py-2 flex items-center gap-2 border-b border-primary/10 bg-surface-light/30">
+                <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">Guides & Articles</span>
+                <span className="text-[10px] font-bold bg-primary/20 text-primary-light px-2 py-0.5 rounded-full">
+                  {results.guides.length + results.blogPosts.length}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                {[...results.guides.slice(0, 3), ...results.blogPosts.slice(0, 2)].map((item) => {
+                  const href = item.slug && item.searchTitle ? `/guides/${item.slug}` : `/blog/${item.slug}`;
+                  const title = item.searchTitle || item.title;
+                  const description = item.description || item.excerpt;
+                  const idx = allResults.findIndex((result) => result.href === href);
+
+                  return (
+                    <button
+                      key={href}
+                      role="option"
+                      aria-selected={highlightIndex === idx}
+                      onClick={() => {
+                        dispatch({ type: 'SET_OPEN', payload: false });
+                        dispatch({ type: 'SET_QUERY', payload: '' });
+                        push(href);
+                      }}
+                      className={`w-full text-left px-5 py-3 border-b border-primary/5 last:border-0 transition-all ${
+                        highlightIndex === idx ? 'bg-primary/15 pl-6' : 'hover:bg-surface-light/50 hover:pl-6'
+                      }`}
+                    >
+                      <h4 className="text-sm font-semibold text-text-primary mb-0.5 truncate">{title}</h4>
+                      <p className="text-xs text-text-secondary truncate">{description}</p>
                     </button>
                   );
                 })}

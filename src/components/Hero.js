@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { BookOpen, FileText, PhoneCall } from 'lucide-react';
 import SearchBar from './SearchBar';
 
 export default function Hero() {
@@ -29,28 +31,43 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
-        <div className="animate-fade-in mb-8">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 text-center flex flex-col items-center">
+        <div className="animate-fade-in mb-6">
           <span className="inline-block px-5 py-2 rounded-full text-sm font-bold tracking-widest uppercase bg-primary/10 text-primary-light border border-primary/20 shadow-[0_0_15px_rgba(108,92,231,0.2)]">
-            Free Legal Rights Assistant for India
+            India&apos;s multilingual legal awareness platform
           </span>
         </div>
 
         <h1
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-tight font-semibold font-[family-name:var(--font-outfit)] mb-8 animate-slide-up tracking-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight font-semibold font-[family-name:var(--font-outfit)] mb-6 animate-slide-up tracking-tight"
         >
-          <span className="gradient-text drop-shadow-lg">Know Your Rights.</span>
+          <span className="gradient-text drop-shadow-lg">Understand Indian Laws in Simple Language</span>
         </h1>
 
         <p
-          className="text-xl sm:text-2xl md:text-3xl text-text-secondary max-w-3xl mx-auto mb-14 animate-slide-up leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-text-secondary max-w-3xl mx-auto mb-8 animate-slide-up leading-relaxed"
           style={{ animationDelay: '0.15s' }}
         >
-          Understand the law. Protect yourself. <span className="text-text-primary font-medium">Take action.</span>
+          Explore rights, legal templates, emergency helplines, and practical legal tools, available in regional languages for Indian citizens.
         </p>
 
+        <div className="flex flex-col sm:flex-row gap-3 mb-10 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <Link href="/rights" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary hover:bg-primary-light text-white font-semibold shadow-lg shadow-primary/20">
+            <BookOpen className="size-5" />
+            Explore Rights
+          </Link>
+          <Link href="/templates" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface/70 hover:bg-surface-light border border-primary/20 text-text-primary font-semibold">
+            <FileText className="size-5" />
+            Legal Templates
+          </Link>
+          <Link href="/helplines" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-danger/15 hover:bg-danger/25 border border-danger/30 text-text-primary font-semibold">
+            <PhoneCall className="size-5" />
+            Emergency Help
+          </Link>
+        </div>
+
         {/* Search bar */}
-        <div className="w-full max-w-3xl mx-auto mb-20 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <div className="w-full max-w-3xl mx-auto mb-14 animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <SearchBar large={true} />
         </div>
 

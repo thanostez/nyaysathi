@@ -21,7 +21,7 @@ const outfit = Outfit({
   display: 'swap',
 });
 
-const siteUrl = 'https://nyaymitra.help';
+const siteUrl = 'https://www.nyaymitra.help';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),

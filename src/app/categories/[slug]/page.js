@@ -34,7 +34,7 @@ export default async function CategoryPage({ params }) {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-8 lg:px-12 w-full mx-auto">
       <Link href="/" className="inline-flex items-center text-text-secondary hover:text-text-primary mb-8 transition-colors">
         &larr; Back to Home
       </Link>

@@ -10,6 +10,7 @@ import { Sun, Moon, Search, ChevronDown, Scale } from 'lucide-react';
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/rights', label: 'Legal Rights' },
+  { href: '/tools', label: 'Tools' },
   { href: '/templates', label: 'Templates' },
   { href: '/blog', label: 'Blog' },
   { href: '/helplines', label: 'Helplines' },
@@ -59,9 +60,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none flex justify-center">
+    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pointer-events-none flex justify-center">
       <nav 
-        className={`pointer-events-auto transition-all duration-500 flex items-center justify-between w-full max-w-7xl px-4 sm:px-6 h-16 rounded-full border ${
+        className={`pointer-events-auto transition-all duration-500 flex items-center justify-between w-full max-w-full px-4 sm:px-8 lg:px-12 h-16 rounded-full border ${
           scrolled 
             ? 'glass-strong shadow-xl border-primary/20 bg-surface/80' 
             : 'glass shadow-lg border-primary/10 bg-surface/50'

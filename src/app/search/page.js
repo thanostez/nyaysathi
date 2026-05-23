@@ -9,7 +9,7 @@ import TemplateCard from '@/components/TemplateCard';
 import HelplineCard from '@/components/HelplineCard';
 
 const searchInitialState = {
-  results: { rights: [], templates: [], helplines: [] },
+  results: { rights: [], templates: [], helplines: [], guides: [], blogPosts: [] },
   loading: false,
 };
 
@@ -17,7 +17,7 @@ function searchReducer(state, action) {
   switch (action.type) {
     case 'RESET':
       return {
-        results: { rights: [], templates: [], helplines: [] },
+        results: { rights: [], templates: [], helplines: [], guides: [], blogPosts: [] },
         loading: false,
       };
     case 'START':
@@ -114,10 +114,15 @@ function SearchResultsContent({ query }) {
     { text: "Ragging prevention", icon: "🎓", category: "Student Rights" }
   ];
 
-  const totalResults = results.rights.length + results.templates.length + results.helplines.length;
+  const totalResults =
+    results.rights.length +
+    results.templates.length +
+    results.helplines.length +
+    results.guides.length +
+    results.blogPosts.length;
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-8 lg:px-12 w-full mx-auto">
       {/* Back button and title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <Link 
@@ -286,6 +291,40 @@ function SearchResultsContent({ query }) {
               Showing {totalResults} result{totalResults !== 1 ? 's' : ''} in total
             </p>
           </div>
+
+          {/* Rights Results */}
+          {(results.guides.length > 0 || results.blogPosts.length > 0) && (
+            <section className="space-y-6">
+              <h3 className="text-xl font-semibold text-text-primary flex items-center gap-2.5">
+                <span className="w-1.5 h-6 rounded-full bg-primary shrink-0" aria-hidden="true" />
+                Guides & Articles ({results.guides.length + results.blogPosts.length})
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {results.guides.map((guide) => (
+                  <Link
+                    key={guide.slug}
+                    href={`/guides/${guide.slug}`}
+                    className="glass p-5 rounded-2xl border border-primary/10 hover:border-primary/40 transition-all"
+                  >
+                    <span className="text-xs font-semibold text-primary uppercase tracking-wider">{guide.category}</span>
+                    <h4 className="text-lg font-semibold text-text-primary mt-2 mb-2">{guide.searchTitle}</h4>
+                    <p className="text-sm text-text-secondary leading-relaxed">{guide.description}</p>
+                  </Link>
+                ))}
+                {results.blogPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="glass p-5 rounded-2xl border border-primary/10 hover:border-primary/40 transition-all"
+                  >
+                    <span className="text-xs font-semibold text-accent uppercase tracking-wider">Blog</span>
+                    <h4 className="text-lg font-semibold text-text-primary mt-2 mb-2">{post.title}</h4>
+                    <p className="text-sm text-text-secondary leading-relaxed">{post.excerpt}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Rights Results */}
           {results.rights.length > 0 && (

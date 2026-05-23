@@ -36,7 +36,7 @@ export default async function BlogCategoryPage({ params }) {
   const posts = getBlogPostsByCategory(slug);
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen pt-28 pb-20 px-4 sm:px-8 lg:px-12 w-full mx-auto">
       <Link href="/blog" className="inline-flex items-center gap-2 text-text-secondary hover:text-primary mb-8 transition-colors">
         <ArrowLeft className="size-4" />
         Blog

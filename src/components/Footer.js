@@ -16,6 +16,7 @@ const footerCategories = [
 
 const quickLinks = [
   { href: '/', label: 'Home' },
+  { href: '/tools', label: 'Legal Tools' },
   { href: '/blog', label: 'Blog' },
   { href: '/templates', label: 'Templates' },
   { href: '/guides', label: 'Guides' },
@@ -35,7 +36,7 @@ const trustLinks = [
 export default function Footer() {
   return (
     <footer className="bg-surface border-t border-primary/10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
+      <div className="mx-auto w-full px-4 sm:px-8 lg:px-12 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">

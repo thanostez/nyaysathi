@@ -37,7 +37,7 @@ export default function HomePage() {
 
       {/* Quick Tools */}
       <section className="py-8 bg-surface-light/30 border-b border-primary/10" aria-label="Quick Tools">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mx-auto w-full px-4 sm:px-8 lg:px-12">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link 
               href="/traffic" 
@@ -59,7 +59,7 @@ export default function HomePage() {
 
       {/* Categories Section */}
       <section className="py-16 sm:py-20" aria-labelledby="categories-heading">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mx-auto w-full px-4 sm:px-8 lg:px-12">
           <div className="text-center mb-12">
             <h2
               id="categories-heading"
@@ -92,7 +92,7 @@ export default function HomePage() {
 
       {/* How It Works */}
       <section className="py-16 sm:py-20 bg-surface/50" aria-labelledby="how-it-works-heading">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-8 lg:px-12">
           <div className="text-center mb-12">
             <h2
               id="how-it-works-heading"

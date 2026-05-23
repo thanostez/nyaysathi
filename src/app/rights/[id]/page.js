@@ -45,7 +45,7 @@ export default async function RightDetailPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-8 lg:px-12 w-full mx-auto">
       {/* Breadcrumb */}
       <nav className="flex text-sm mb-8 text-text-secondary">
         <ol className="flex items-center gap-x-2">
