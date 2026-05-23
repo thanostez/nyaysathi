@@ -21,7 +21,10 @@ const outfit = Outfit({
   display: 'swap',
 });
 
+const siteUrl = 'https://nyaymitra.help';
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'NyayMitra - Know Your Legal Rights',
   description:
     'Your free legal rights assistant for India. Understand your rights, access legal templates, and find emergency helplines - all in plain language.',
@@ -72,9 +75,49 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }) {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'NyayMitra',
+        url: siteUrl,
+        logo: `${siteUrl}/icon-512.png`,
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: 'contact@nyaymitra.help',
+          contactType: 'customer support',
+          areaServed: 'IN',
+          availableLanguage: ['English', 'Hindi'],
+        },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        name: 'NyayMitra',
+        url: siteUrl,
+        publisher: {
+          '@id': `${siteUrl}/#organization`,
+        },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${siteUrl}/search?q={search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      },
+    ],
+  };
+
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col font-sans antialiased bg-bg-dark text-text-primary pb-20 md:pb-0">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+          }}
+        />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
           <main className="flex-1">{children}</main>
@@ -84,7 +127,7 @@ export default function RootLayout({ children }) {
           <InstallPWA />
         </ThemeProvider>
         <Analytics />
-        <Script id="register-sw" strategy="afterInteractive">
+        <Script id="register-sw" strategy="lazyOnload">
           {`
             if ('serviceWorker' in navigator) {
               window.addEventListener('load', function() {

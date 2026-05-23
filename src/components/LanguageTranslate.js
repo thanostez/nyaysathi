@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Script from 'next/script';
+import { useEffect, useRef } from 'react';
 
 const languages = [
   { code: 'en', label: 'English' },
@@ -19,15 +18,30 @@ const languages = [
   { code: 'as', label: 'Assamese (অসমীয়া)' },
 ];
 
+function getSavedLanguage() {
+  if (typeof document === 'undefined') return 'en';
+  const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
+  return match?.[1]?.split('/')[2] || 'en';
+}
+
+function loadGoogleTranslate() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById('google-translate-script')) return;
+
+  const script = document.createElement('script');
+  script.id = 'google-translate-script';
+  script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  script.async = true;
+  script.onerror = () => {
+    console.warn('Google Translate failed to load.');
+  };
+  document.body.appendChild(script);
+}
+
 export default function LanguageTranslate() {
-  const [currentLang, setCurrentLang] = useState(() => {
-    if (typeof document === 'undefined') return 'en';
-    const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
-    return match?.[1]?.split('/')[2] || 'en';
-  });
+  const selectRef = useRef(null);
 
   useEffect(() => {
-    // Initialize the hidden Google Translate engine
     window.googleTranslateElementInit = () => {
       if (window.google && window.google.translate) {
         new window.google.translate.TranslateElement(
@@ -40,11 +54,19 @@ export default function LanguageTranslate() {
         );
       }
     };
+
+    const savedLang = getSavedLanguage();
+    if (selectRef.current) {
+      selectRef.current.value = savedLang;
+    }
+
+    if (savedLang !== 'en') {
+      loadGoogleTranslate();
+    }
   }, []);
 
   const handleLanguageChange = (e) => {
     const selectedLang = e.target.value;
-    setCurrentLang(selectedLang);
 
     if (selectedLang === 'en') {
       // Clear cookies to revert to original English
@@ -56,7 +78,7 @@ export default function LanguageTranslate() {
       document.cookie = `googtrans=/en/${selectedLang}; domain=${window.location.hostname}; path=/`;
     }
 
-    // Reload the page to let the Google script translate it based on the new cookie
+    loadGoogleTranslate();
     window.location.reload();
   };
 
@@ -72,8 +94,10 @@ export default function LanguageTranslate() {
         </div>
         
         <select
-          value={currentLang}
+          ref={selectRef}
+          defaultValue="en"
           onChange={handleLanguageChange}
+          onFocus={loadGoogleTranslate}
           className="appearance-none bg-surface-light/30 hover:bg-surface-light/50 border border-primary/20 text-text-primary text-xs md:text-sm rounded-lg pl-8 md:pl-9 pr-6 md:pr-8 py-1.5 md:py-2 outline-none cursor-pointer backdrop-blur-md transition-all font-medium focus:border-primary/50 shadow-sm shadow-primary/5 max-w-[100px] sm:max-w-[130px] md:max-w-none truncate"
         >
           {languages.map((lang) => (
@@ -92,12 +116,7 @@ export default function LanguageTranslate() {
 
       {/* Hidden Google Translate Engine */}
       <div id="google_translate_element" className="hidden"></div>
-      
-      <Script
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-        strategy="afterInteractive"
-      />
-      
+
       <style>{`
         /* Eradicate the Google banner perfectly */
         .goog-te-banner-frame,

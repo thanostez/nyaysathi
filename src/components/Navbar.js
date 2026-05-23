@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/rights', label: 'Legal Rights' },
   { href: '/templates', label: 'Templates' },
+  { href: '/blog', label: 'Blog' },
   { href: '/helplines', label: 'Helplines' },
   { href: '/traffic', label: 'Traffic Fines' },
 ];
@@ -34,7 +35,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const dropdownRef = useRef(null);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -149,9 +150,9 @@ export default function Navbar() {
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
             className="p-2.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/10 transition-all hover:scale-110"
             aria-label="Toggle Dark Mode"
-            suppressHydrationWarning
           >
-            {resolvedTheme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
+            <Sun className="theme-icon-sun size-5" />
+            <Moon className="theme-icon-moon size-5" />
           </button>
 
           {/* Language Translation (hidden on very small screens) */}

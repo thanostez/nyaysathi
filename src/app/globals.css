@@ -216,6 +216,18 @@ body {
   background-clip: text;
 }
 
+.theme-icon-sun {
+  display: none;
+}
+
+.dark .theme-icon-sun {
+  display: block;
+}
+
+.dark .theme-icon-moon {
+  display: none;
+}
+
 /* ── Smooth transitions for interactives ───── */
 a, button {
   transition: all 0.2s ease;

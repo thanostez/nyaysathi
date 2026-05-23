@@ -13,6 +13,13 @@ import bankingFinance from './rights/banking-finance';
 import templates from './templates';
 import helplines from './helplines';
 import trafficFines from './traffic';
+import guides, { getGuideBySlug } from './guides';
+import blogPosts, {
+  blogCategories,
+  getBlogCategoryBySlug,
+  getBlogPostBySlug,
+  getBlogPostsByCategory,
+} from './blog';
 
 const rightsMap = {
   employment,
@@ -80,4 +87,17 @@ export function searchTrafficFines(query) {
   );
 }
 
-export { categories, templates, helplines, rightsMap, trafficFines };
+export {
+  categories,
+  templates,
+  helplines,
+  rightsMap,
+  trafficFines,
+  guides,
+  getGuideBySlug,
+  blogPosts,
+  blogCategories,
+  getBlogCategoryBySlug,
+  getBlogPostBySlug,
+  getBlogPostsByCategory,
+};

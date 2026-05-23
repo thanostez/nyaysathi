@@ -16,9 +16,20 @@ const footerCategories = [
 
 const quickLinks = [
   { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
   { href: '/templates', label: 'Templates' },
+  { href: '/guides', label: 'Guides' },
   { href: '/helplines', label: 'Helplines' },
   { href: '/search', label: 'Search' },
+];
+
+const trustLinks = [
+  { href: '/about', label: 'Made for Indians' },
+  { href: '/about#founder-story', label: 'Founder story' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/privacy', label: 'Privacy policy' },
+  { href: '/terms', label: 'Terms' },
+  { href: '/legal-disclaimer', label: 'Legal disclaimer' },
 ];
 
 export default function Footer() {
@@ -78,11 +89,23 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal info */}
+          {/* Trust and legal */}
           <div>
             <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wider mb-4">
-              Legal
+              Trust & Legal
             </h3>
+            <ul className="space-y-2.5 mb-5">
+              {trustLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-text-secondary hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <div className="text-xs text-text-secondary leading-relaxed space-y-3">
               <p>
                 This platform provides general legal information based on Indian laws and is not a substitute for professional legal advice.
