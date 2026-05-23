@@ -18,6 +18,56 @@ const languages = [
   { code: 'as', label: 'Assamese (অসমীয়া)' },
 ];
 
+const getCookieDomains = () => {
+  if (typeof window === 'undefined') return [];
+  const hostname = window.location.hostname;
+  const domains = [hostname];
+  
+  if (hostname.includes('.') && !/^[0-9.]+$/.test(hostname)) {
+    const parts = hostname.split('.');
+    if (parts.length > 2) {
+      const apexDomain = parts.slice(-2).join('.');
+      domains.push(apexDomain);
+      domains.push(`.${apexDomain}`);
+      domains.push(`.${hostname}`);
+    } else {
+      domains.push(`.${hostname}`);
+    }
+  }
+  return domains;
+};
+
+const clearLanguageCookie = () => {
+  if (typeof document === 'undefined') return;
+  const domains = getCookieDomains();
+  
+  // Clear without domain (defaults to current host)
+  document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  
+  // Clear with domains
+  domains.forEach((domain) => {
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${domain}; path=/;`;
+  });
+};
+
+const setLanguageCookie = (lang) => {
+  if (typeof document === 'undefined') return;
+  
+  // Clear any existing ones on different domains to prevent duplicates
+  clearLanguageCookie();
+
+  const value = `/en/${lang}`;
+  const domains = getCookieDomains();
+
+  // Set on default host
+  document.cookie = `googtrans=${value}; path=/;`;
+  
+  // Set on all domains
+  domains.forEach((domain) => {
+    document.cookie = `googtrans=${value}; domain=${domain}; path=/;`;
+  });
+};
+
 function getSavedLanguage() {
   if (typeof document === 'undefined') return 'en';
   const match = document.cookie.match(/(?:^|;)\s*googtrans=([^;]*)/);
@@ -69,19 +119,14 @@ export default function LanguageTranslate() {
     const selectedLang = e.target.value;
 
     if (selectedLang === 'en') {
-      // Clear cookies to revert to original English
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=${window.location.hostname}; path=/;`;
+      clearLanguageCookie();
     } else {
-      // Set the translation cookie
-      document.cookie = `googtrans=/en/${selectedLang}; path=/`;
-      document.cookie = `googtrans=/en/${selectedLang}; domain=${window.location.hostname}; path=/`;
+      setLanguageCookie(selectedLang);
     }
 
     loadGoogleTranslate();
     window.location.reload();
   };
-
   return (
     <div className="relative inline-block">
       
