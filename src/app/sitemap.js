@@ -1,12 +1,6 @@
 import { categories, getAllRights, templates } from '@/data';
 
-const siteUrl =
-  `https://nyaymitra.help/` ||
-  (`https://nyaymitra.help/`
-    ? `https://nyaymitra.help/`
-    : 'http://localhost:3000');
-
-const baseUrl = siteUrl.replace(/\/$/, '');
+const baseUrl = 'https://nyaymitra.help';
 
 function entry(path, changeFrequency, priority) {
   return {

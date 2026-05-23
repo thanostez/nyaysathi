@@ -1,0 +1,11 @@
+const baseUrl = 'https://nyaymitra.help';
+
+export default function robots() {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+    },
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
+}
