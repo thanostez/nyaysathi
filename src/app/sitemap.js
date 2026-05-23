@@ -1,9 +1,9 @@
 import { categories, getAllRights, templates } from '@/data';
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  `https://nyaymitra.help/` ||
+  (`https://nyaymitra.help/`
+    ? `https://nyaymitra.help/`
     : 'http://localhost:3000');
 
 const baseUrl = siteUrl.replace(/\/$/, '');
