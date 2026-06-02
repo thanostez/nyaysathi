@@ -62,7 +62,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pointer-events-none flex justify-center">
       <nav 
-        className={`pointer-events-auto transition-all duration-500 flex items-center justify-between w-full max-w-full px-4 sm:px-8 lg:px-12 h-16 rounded-full border ${
+        className={`pointer-events-auto transition-all duration-500 flex items-center justify-between w-full max-w-full px-3 sm:px-8 lg:px-12 h-16 rounded-full border ${
           scrolled 
             ? 'glass-strong shadow-xl border-primary/20 bg-surface/80' 
             : 'glass shadow-lg border-primary/10 bg-surface/50'
@@ -76,7 +76,7 @@ export default function Navbar() {
           aria-label="NyayMitra Home"
         >
           <Scale className="size-8 text-primary drop-shadow-md" aria-hidden="true" />
-          <span className="gradient-text tracking-tight">NyayMitra</span>
+          <span className="hidden min-[430px]:inline gradient-text tracking-tight">NyayMitra</span>
         </Link>
 
         {/* Desktop navigation */}
@@ -156,8 +156,8 @@ export default function Navbar() {
             <Moon className="theme-icon-moon size-5" />
           </button>
 
-          {/* Language Translation (hidden on very small screens) */}
-          <div className="hidden sm:block pl-2 border-l border-primary/10">
+          {/* Language Translation */}
+          <div className="block pl-1.5 sm:pl-2 border-l border-primary/10">
             <LanguageTranslate />
           </div>
         </div>
