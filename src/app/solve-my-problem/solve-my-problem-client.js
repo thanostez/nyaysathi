@@ -257,41 +257,41 @@ export default function SolveMyProblemClient() {
   }
 
   return (
-    <main className="min-h-screen px-4 pb-16 pt-24 sm:px-6 lg:px-10">
-      <div className="mx-auto max-w-7xl">
+    <main className="min-h-screen overflow-x-hidden px-3 pb-14 pt-20 sm:px-6 sm:pt-24 lg:px-10">
+      <div className="mx-auto max-w-7xl min-w-0">
         <section className="grid items-end gap-6 pb-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(320px,0.45fr)]">
-          <div>
+          <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-bold uppercase text-primary">
               <Sparkles className="size-4" />
               AI Legal GPS
             </span>
-            <h1 className="mt-5 max-w-4xl font-[family-name:var(--font-outfit)] text-3xl font-semibold leading-tight text-text-primary sm:text-5xl">
+            <h1 className="mt-4 max-w-4xl break-words font-[family-name:var(--font-outfit)] text-2xl font-semibold leading-tight text-text-primary sm:mt-5 sm:text-5xl">
               Turn a legal problem into a clear action plan and ready drafts.
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-text-secondary">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-text-secondary sm:mt-4 sm:text-base sm:leading-7">
               Describe what happened once. NyayMitra prepares the issue summary, rights position, evidence checklist,
               action roadmap, timeline, and document drafts including FIR format.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3">
             {quickFacts.map((fact) => (
-              <div key={fact} className="rounded-lg border border-primary/10 bg-surface px-4 py-3 shadow-sm">
+              <div key={fact} className="rounded-lg border border-primary/10 bg-surface px-3 py-3 shadow-sm sm:px-4">
                 <p className="text-sm font-semibold text-text-primary">{fact}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(340px,0.42fr)_minmax(0,0.58fr)]">
-          <section className="rounded-lg border border-primary/10 bg-surface p-5 shadow-xl shadow-primary/5 sm:p-6">
-            <form onSubmit={analyzeProblem} className="space-y-5">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-6">
+          <section className="min-w-0 rounded-lg border border-primary/10 bg-surface p-4 shadow-xl shadow-primary/5 sm:p-6">
+            <form onSubmit={analyzeProblem} className="min-w-0 space-y-5">
               <div className="flex items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-text-primary">Case Intake</h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-semibold text-text-primary sm:text-xl">Case Intake</h2>
                   <p className="mt-1 text-sm text-text-secondary">{problem.trim().length} characters entered</p>
                 </div>
-                <ShieldCheck className="size-9 text-primary" />
+                <ShieldCheck className="size-8 shrink-0 text-primary sm:size-9" />
               </div>
 
               <textarea
@@ -299,7 +299,7 @@ export default function SolveMyProblemClient() {
                 value={problem}
                 onChange={(event) => setProblem(event.target.value)}
                 placeholder="Example: On 12 May, I paid Rs. 25,000 through UPI to an online seller for a phone. They stopped replying and blocked my number. I have screenshots, payment reference, and chat history."
-                className="min-h-72 w-full resize-y rounded-lg border border-primary/15 bg-bg-dark/5 px-4 py-4 text-sm leading-6 text-text-primary placeholder:text-text-secondary/70 focus:border-primary focus:outline-none dark:bg-surface-light/35"
+                className="min-h-56 w-full resize-y rounded-lg border border-primary/15 bg-bg-dark/5 px-3 py-3 text-sm leading-6 text-text-primary placeholder:text-text-secondary/70 focus:border-primary focus:outline-none sm:min-h-72 sm:px-4 sm:py-4 dark:bg-surface-light/35"
               />
 
               <div className="space-y-2">
@@ -309,9 +309,9 @@ export default function SolveMyProblemClient() {
                     key={example}
                     type="button"
                     onClick={() => setProblem(example)}
-                    className="group flex w-full items-center justify-between gap-3 rounded-lg border border-primary/10 bg-surface-light/35 px-4 py-3 text-left text-sm text-text-secondary hover:border-primary/40 hover:text-text-primary"
+                    className="group flex w-full min-w-0 items-center justify-between gap-3 rounded-lg border border-primary/10 bg-surface-light/35 px-3 py-3 text-left text-sm text-text-secondary hover:border-primary/40 hover:text-text-primary sm:px-4"
                   >
-                    <span>{example}</span>
+                    <span className="min-w-0 break-words">{example}</span>
                     <ArrowRight className="size-4 shrink-0 opacity-60 group-hover:translate-x-1" />
                   </button>
                 ))}
@@ -335,19 +335,19 @@ export default function SolveMyProblemClient() {
             </form>
           </section>
 
-          <section className="space-y-5">
+          <section className="min-w-0 space-y-5">
             {!result ? (
-              <div className="rounded-lg border border-primary/10 bg-surface p-6 shadow-xl shadow-primary/5 sm:p-8">
-                <div className="grid gap-4 sm:grid-cols-2">
+              <div className="min-w-0 rounded-lg border border-primary/10 bg-surface p-4 shadow-xl shadow-primary/5 sm:p-8">
+                <div className="grid min-w-0 gap-3 sm:grid-cols-2 sm:gap-4">
                   {[
                     ['Issue summary', 'Category, subcategory, and severity'],
                     ['Rights position', 'Plain-English legal information'],
                     ['Evidence list', 'Documents and proofs to preserve'],
                     ['Generated drafts', 'FIR, complaint, notice, and more'],
                   ].map(([title, body]) => (
-                    <div key={title} className="rounded-lg border border-primary/10 bg-surface-light/35 p-5">
+                    <div key={title} className="min-w-0 rounded-lg border border-primary/10 bg-surface-light/35 p-4 sm:p-5">
                       <BadgeCheck className="mb-4 size-6 text-primary" />
-                      <h3 className="font-semibold text-text-primary">{title}</h3>
+                      <h3 className="break-words font-semibold text-text-primary">{title}</h3>
                       <p className="mt-2 text-sm leading-6 text-text-secondary">{body}</p>
                     </div>
                   ))}
@@ -355,88 +355,88 @@ export default function SolveMyProblemClient() {
               </div>
             ) : (
               <>
-                <div className="rounded-lg border border-primary/10 bg-surface p-5 shadow-xl shadow-primary/5 sm:p-6">
+                <div className="min-w-0 rounded-lg border border-primary/10 bg-surface p-4 shadow-xl shadow-primary/5 sm:p-6">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs font-bold uppercase text-text-secondary">Problem identified</p>
-                      <h2 className="mt-2 text-2xl font-semibold text-text-primary">
+                      <h2 className="mt-2 break-words text-xl font-semibold text-text-primary sm:text-2xl">
                         {safeResult.subcategory || safeResult.category || 'Legal Issue'}
                       </h2>
                     </div>
-                    <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-bold ${severityTone(safeResult.severity)}`}>
+                    <span className={`inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-bold ${severityTone(safeResult.severity)}`}>
                       <Scale className="size-4" />
                       {safeResult.severity || 'Medium'}
                     </span>
                   </div>
 
-                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-lg bg-surface-light/35 p-4">
+                  <div className="mt-5 grid min-w-0 gap-3 sm:grid-cols-2">
+                    <div className="min-w-0 rounded-lg bg-surface-light/35 p-4">
                       <p className="text-xs font-bold uppercase text-text-secondary">Category</p>
-                      <p className="mt-2 font-semibold text-text-primary">{safeResult.category || 'Not specified'}</p>
+                      <p className="mt-2 break-words font-semibold text-text-primary">{safeResult.category || 'Not specified'}</p>
                     </div>
-                    <div className="rounded-lg bg-surface-light/35 p-4">
+                    <div className="min-w-0 rounded-lg bg-surface-light/35 p-4">
                       <p className="text-xs font-bold uppercase text-text-secondary">Timeline</p>
                       <p className="mt-2 text-sm leading-6 text-text-primary">{safeResult.timeline || 'Depends on forum and urgency.'}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid gap-5 xl:grid-cols-[minmax(0,0.95fr)_minmax(280px,0.65fr)]">
-                  <div className="rounded-lg border border-primary/10 bg-surface p-5 shadow-xl shadow-primary/5 sm:p-6">
-                    <h2 className="flex items-center gap-2 text-xl font-semibold text-text-primary">
+                <div className="grid min-w-0 gap-5 xl:grid-cols-[minmax(0,0.95fr)_minmax(280px,0.65fr)]">
+                  <div className="min-w-0 rounded-lg border border-primary/10 bg-surface p-4 shadow-xl shadow-primary/5 sm:p-6">
+                    <h2 className="flex items-center gap-2 text-lg font-semibold text-text-primary sm:text-xl">
                       <Gavel className="size-5 text-primary" />
                       Rights Position
                     </h2>
                     <p className="mt-4 text-sm leading-7 text-text-secondary">{safeResult.rights}</p>
                   </div>
 
-                  <div className="rounded-lg border border-primary/10 bg-surface p-5 shadow-xl shadow-primary/5 sm:p-6">
-                    <h2 className="flex items-center gap-2 text-xl font-semibold text-text-primary">
+                  <div className="min-w-0 rounded-lg border border-primary/10 bg-surface p-4 shadow-xl shadow-primary/5 sm:p-6">
+                    <h2 className="flex items-center gap-2 text-lg font-semibold text-text-primary sm:text-xl">
                       <ClipboardCheck className="size-5 text-accent" />
                       Evidence
                     </h2>
                     <div className="mt-4 space-y-2">
                       {evidence.map((item) => (
-                        <label key={item} className="flex items-start gap-3 rounded-lg bg-surface-light/35 p-3 text-sm text-text-secondary">
+                        <label key={item} className="flex min-w-0 items-start gap-3 rounded-lg bg-surface-light/35 p-3 text-sm text-text-secondary">
                           <input type="checkbox" className="mt-1 size-4 accent-primary" />
-                          <span>{item}</span>
+                          <span className="min-w-0 break-words">{item}</span>
                         </label>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-primary/10 bg-surface p-5 shadow-xl shadow-primary/5 sm:p-6">
-                  <h2 className="flex items-center gap-2 text-xl font-semibold text-text-primary">
+                <div className="min-w-0 rounded-lg border border-primary/10 bg-surface p-4 shadow-xl shadow-primary/5 sm:p-6">
+                  <h2 className="flex items-center gap-2 text-lg font-semibold text-text-primary sm:text-xl">
                     <MessageSquareText className="size-5 text-primary" />
                     Action Roadmap
                   </h2>
-                  <div className="mt-5 grid gap-3 md:grid-cols-2">
+                  <div className="mt-5 grid min-w-0 gap-3 md:grid-cols-2">
                     {roadmap.map((step, index) => (
-                      <div key={`${step}-${index}`} className="flex gap-3 rounded-lg border border-primary/10 bg-surface-light/30 p-4">
+                      <div key={`${step}-${index}`} className="flex min-w-0 gap-3 rounded-lg border border-primary/10 bg-surface-light/30 p-3 sm:p-4">
                         <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
                           {index + 1}
                         </span>
-                        <p className="text-sm leading-6 text-text-secondary">{step}</p>
+                        <p className="min-w-0 break-words text-sm leading-6 text-text-secondary">{step}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-primary/10 bg-surface p-5 shadow-xl shadow-primary/5 sm:p-6">
+                <div className="min-w-0 rounded-lg border border-primary/10 bg-surface p-4 shadow-xl shadow-primary/5 sm:p-6">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                    <div>
-                      <h2 className="flex items-center gap-2 text-xl font-semibold text-text-primary">
+                    <div className="min-w-0">
+                      <h2 className="flex items-center gap-2 text-lg font-semibold text-text-primary sm:text-xl">
                         <FileSignature className="size-5 text-primary" />
                         Generated Drafts
                       </h2>
                       <p className="mt-1 text-sm text-text-secondary">All drafts are generated from your problem summary and analysis.</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="grid grid-cols-2 gap-2 sm:flex">
                       <button
                         type="button"
                         onClick={copyDraft}
-                        className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary/15 px-4 py-2 text-sm font-bold text-text-primary hover:border-primary/50"
+                        className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary/15 px-3 py-2 text-sm font-bold text-text-primary hover:border-primary/50 sm:px-4"
                       >
                         {copied ? <Check className="size-4 text-success" /> : <Clipboard className="size-4" />}
                         {copied ? 'Copied' : 'Copy'}
@@ -444,7 +444,7 @@ export default function SolveMyProblemClient() {
                       <button
                         type="button"
                         onClick={downloadDraft}
-                        className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-bold text-bg-dark hover:opacity-90"
+                        className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-3 py-2 text-sm font-bold text-bg-dark hover:opacity-90 sm:px-4"
                       >
                         <Download className="size-4" />
                         Download
@@ -452,13 +452,13 @@ export default function SolveMyProblemClient() {
                     </div>
                   </div>
 
-                  <div className="mt-5 flex gap-2 overflow-x-auto pb-2">
+                  <div className="mt-5 grid grid-cols-1 gap-2 sm:flex sm:overflow-x-auto sm:pb-2">
                     {draftTypes.map((type) => (
                       <button
                         key={type}
                         type="button"
                         onClick={() => setActiveDraft(type)}
-                        className={`whitespace-nowrap rounded-lg border px-4 py-2 text-sm font-semibold ${
+                        className={`min-w-0 rounded-lg border px-3 py-2 text-left text-sm font-semibold sm:whitespace-nowrap sm:px-4 ${
                           activeDraft === type
                             ? 'border-primary bg-primary text-white'
                             : 'border-primary/15 bg-surface-light/35 text-text-secondary hover:border-primary/50 hover:text-text-primary'
@@ -470,14 +470,14 @@ export default function SolveMyProblemClient() {
                     ))}
                   </div>
 
-                  <pre className="mt-4 max-h-[520px] overflow-auto whitespace-pre-wrap rounded-lg border border-primary/10 bg-bg-dark/70 p-4 text-sm leading-7 text-slate-100 dark:bg-black/25">
+                  <pre className="mt-4 max-h-[420px] max-w-full overflow-auto whitespace-pre-wrap break-words rounded-lg border border-primary/10 bg-bg-dark/70 p-3 text-xs leading-6 text-slate-100 sm:max-h-[520px] sm:p-4 sm:text-sm sm:leading-7 dark:bg-black/25">
                     {activeDraftContent}
                   </pre>
                 </div>
 
-                <div className="flex items-start gap-3 rounded-lg border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-text-secondary">
+                <div className="flex min-w-0 items-start gap-3 rounded-lg border border-warning/30 bg-warning/10 px-3 py-3 text-sm text-text-secondary sm:px-4">
                   <AlertCircle className="mt-0.5 size-5 shrink-0 text-warning" />
-                  <p>
+                  <p className="min-w-0 break-words">
                     This is AI-generated legal information and a draft starting point. Review names, dates, sections, forum,
                     jurisdiction, and attachments before submitting anything.
                   </p>
