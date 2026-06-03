@@ -15,6 +15,7 @@ export default function sitemap() {
   const mainRoutes = [
     entry('/', 'weekly', 1),
     entry('/rights', 'weekly', 0.9),
+    entry('/solve-my-problem', 'weekly', 0.9),
     entry('/tools', 'weekly', 0.8),
     entry('/templates', 'monthly', 0.8),
     entry('/blog', 'weekly', 0.9),

@@ -6,7 +6,7 @@ import { categories } from '@/data';
 import Link from 'next/link';
 import NearestPoliceBtn from '@/components/NearestPoliceBtn';
 
-import { Search, BookOpen, Zap, Car } from 'lucide-react';
+import { Search, BookOpen, Zap, Car, ArrowRight, WandSparkles } from 'lucide-react';
 
 const howItWorks = [
   {
@@ -34,6 +34,34 @@ export default function HomePage() {
 
       {/* Emergency Strip */}
       <EmergencyStrip />
+
+      {/* Solve My Problem Banner */}
+      <section className="py-8 bg-surface border-y border-primary/10" aria-label="Solve My Problem">
+        <div className="mx-auto w-full px-4 sm:px-8 lg:px-12">
+          <Link
+            href="/solve-my-problem"
+            className="group flex flex-col gap-5 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/15 via-surface to-accent/15 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/20">
+                <WandSparkles className="size-6" />
+              </div>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-semibold font-[family-name:var(--font-outfit)] text-text-primary">
+                  Have a Legal Problem?
+                </h2>
+                <p className="mt-2 max-w-2xl text-sm sm:text-base text-text-secondary leading-relaxed">
+                  Describe your situation and get a step-by-step legal roadmap in seconds.
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-bold text-white group-hover:bg-primary-hover">
+              Solve My Problem
+              <ArrowRight className="size-5" />
+            </span>
+          </Link>
+        </div>
+      </section>
 
       {/* Quick Tools */}
       <section className="py-8 bg-surface-light/30 border-b border-primary/10" aria-label="Quick Tools">
